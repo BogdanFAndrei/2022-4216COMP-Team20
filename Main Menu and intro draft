@@ -1,17 +1,20 @@
+from multiprocessing.spawn import spawn_main
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
 
-#Intro Menu
+from setuptools import Command
+
+#Create Intro Menu
 start = Tk()
 start.title("Climate and Weather Team 20")
 start.geometry('500x320')
 start.configure(background="darkgrey")
 
-#Intro Headline
+#Creates Headline for Intro
 ttk.Label(start, text = "Welcome to Weather + Climate", 
           background = 'black', foreground ="white", 
-          font = ("Times New Roman", 15)).grid(row = 0, column = 0) 
+          font = ("Times New Roman", 15)).grid(row = 0, column = 0)
 
 #Function for start button
 def main ():
@@ -19,15 +22,37 @@ def main ():
     main.title("Main Menu")
     main.geometry('500x320')
     main.configure(background="green")
-    ttk.Label(main, text = "Welcome to Weather", 
-          background = 'black', foreground ="white", 
-          font = ("Times New Roman", 15)).grid(row = 0, column = 0) 
-
     start.destroy()
+    
+    #Lable for Main Menu
+    ttk.Label(main, text = "Main Menu", 
+          background = 'black', foreground ="white", 
+          font = ("Times New Roman", 15)).grid(row = 0, column = 0)
+    #Button1 Option 1
+    Button(main,text="Click to Start", width=8, command=op1) .grid(row=8,column=1,sticky=W)
+    main.mainloop()
 
-#addbutton (Start)
+#Function for start Button
 Button(start,text="Click to Start", width=8, command=main) .grid(row=8,column=1,sticky=W)
 
+#Option 1 Function
+def op1 ():
+    op1 = Tk()
+    op1.title("Option 1")
+    op1.geometry('500x320')
+    op1.configure(background="blue")
+    
+    #Lable for Option1
+    ttk.Label(op1, text = "Option 1", 
+          background = 'black', foreground ="white", 
+          font = ("Times New Roman", 15)).grid(row = 0, column = 0)
+
+        #Button1 Option 1
+    Button(op1,text="Click to Start", width=8, command=start) .grid(row=8,column=1,sticky=W)
+    op1.mainloop()
+
+
 start.mainloop()
-main.mainloop()
+
+
 
