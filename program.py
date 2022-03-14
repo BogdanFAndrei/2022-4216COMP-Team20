@@ -20,7 +20,9 @@ ttk.Label(window, text = "Select the Year :",
 n = tk.StringVar()
 yearchoosen = ttk.Combobox(window, width = 27, textvariable = n)
 # Adding combobox drop down list
-yearchoosen['values'] = (' 2015', 
+yearchoosen['values'] = (' 2013',
+                         ' 2014',
+                         ' 2015',
                           ' 2016',
                           ' 2017',
                           ' 2018',
