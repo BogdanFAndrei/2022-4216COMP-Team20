@@ -5,7 +5,7 @@ from tkinter import ttk
 # Creating tkinter window
 window = Tk()
 window.title("Climate and Weather Team 20")
-window.geometry('500x500')
+window.geometry('500x300')
 window.configure(background="darkgrey")
 
 ttk.Label(window, text = "Climate and weather Team 20", 
@@ -65,9 +65,9 @@ ttk.Label(window, text = "Select the  :",
 n = tk.StringVar()
 typevalue = ttk.Combobox(window, width = 27, textvariable = n)
 # Adding combobox drop down list
-typevalue['values'] = (' min', 
-                          ' avg',
-                          ' max')
+typevalue['values'] = (' Minimum ', 
+                          ' Average ',
+                          ' Maximum ')
 typevalue.grid(column = 1, row = 7)
 typevalue.current()
 
