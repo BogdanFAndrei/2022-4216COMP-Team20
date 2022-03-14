@@ -5,7 +5,7 @@ from tkinter import ttk
 # Creating tkinter window
 window = Tk()
 window.title("Climate and Weather Team 20")
-window.geometry('500x300')
+window.geometry('500x320')
 window.configure(background="darkgrey")
 
 ttk.Label(window, text = "Climate and weather Team 20", 
