@@ -1,30 +1,50 @@
 #import csv file
-#import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 
 import csv
 
 filename = 'FinallOneCSV.csv'
 
+
 with open(filename, 'r') as csvfile:
     datareader = csv.reader(csvfile)
-    tempmin = []
-    counter = 12
+    tempmin2020 = []
+    counter = 0
     rowCounter = 1
+    
     for row in datareader:
-        rowCounter=rowCounter+1 
-        if (row[0] == 'Average '):
-            tempmin.append(row[2])
+        rowCounter=rowCounter+1
+        if (row[0] == 'Average2020'):
+            tempmin2020.append(row[2])
             counter= counter-1
-            print (tempmin)    
+            print (tempmin2020)    
         if (counter== 1):
             break
-#Time2020=['January','February','asdad','dadas' ,'dasds','dasddsas','dasfdas','dasdahs','dasdtas','dasdeqas','dastdas','dauksdas']
-#Temperature= [tempmin]
-#plt.plot(Time2020,tempmin)
-#plt.title('Temperature 2020')
-#plt.xlabel('Time2020')
-#plt.ylabel('Temperature')
-#plt.show()
+Time2020=['January','February','March','April' ,'May','June','July','August','September','October','November','December']
+Temperature= [tempmin2020]
+plt.plot(Time2020,tempmin2020)
+plt.title('Temperature 2020')
+plt.xlabel('Time2020')
+plt.ylabel('Temperature')
+plt.show()
+print ('--------------------------------------------')
+with open(filename, 'r') as csvfile:
+    datareader = csv.reader(csvfile)
+    tempmin2019 = []
+
+    
+    for row in datareader:
+       
+        if (row[0] == 'Average2019 '):
+            tempmin2019.append(row[2])
+            print (tempmin2019)    
+Time2020=['January','February','March','April' ,'May','June','July','August','September','October','November','December']
+Temperature= [tempmin2019]
+plt.plot(Time2020,tempmin2019)
+plt.title('Minimum Temperature 2020')
+plt.xlabel('Month')
+plt.ylabel('Temperature')
+plt.show()
 
 
 #menu 
