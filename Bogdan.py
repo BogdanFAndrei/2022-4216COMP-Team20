@@ -1,11 +1,10 @@
 #import csv file
 import matplotlib.pyplot as plt
-
 import csv
 
 filename = 'FinallOneCSV.csv'
 
-
+#code for 2020
 with open(filename, 'r') as csvfile:
     datareader = csv.reader(csvfile)
     tempmin2020 = []
@@ -20,6 +19,7 @@ with open(filename, 'r') as csvfile:
             print (tempmin2020)    
         if (counter== 1):
             break
+#pyplot setting up the x-axis and y-axis            
 Time2020=['January','February','March','April' ,'May','June','July','August','September','October','November','December']
 Temperature= [tempmin2020]
 plt.plot(Time2020,tempmin2020)
@@ -28,6 +28,7 @@ plt.xlabel('Time2020')
 plt.ylabel('Temperature')
 plt.show()
 print ('--------------------------------------------')
+#code for 2019
 with open(filename, 'r') as csvfile:
     datareader = csv.reader(csvfile)
     tempmin2019 = []
@@ -38,6 +39,7 @@ with open(filename, 'r') as csvfile:
         if (row[0] == 'Average2019 '):
             tempmin2019.append(row[2])
             print (tempmin2019)    
+#pyplot setting up the x-axis and y-axis             
 Time2020=['January','February','March','April' ,'May','June','July','August','September','October','November','December']
 Temperature= [tempmin2019]
 plt.plot(Time2020,tempmin2019)
