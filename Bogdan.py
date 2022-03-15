@@ -1,7 +1,5 @@
 #import csv file
-import pandas as pd
-#import linecache
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 
 import csv
 
@@ -10,19 +8,23 @@ filename = 'FinallOneCSV.csv'
 with open(filename, 'r') as csvfile:
     datareader = csv.reader(csvfile)
     tempmin = []
+    counter = 12
+    rowCounter = 1
     for row in datareader:
+        rowCounter=rowCounter+1 
         if (row[0] == 'Average '):
             tempmin.append(row[2])
-    print (tempmin)    
-
-Time2020=['January','February','asdad','dadas' ,'dasds','dasddsas','dasfdas','dasdahs','dasdtas','dasdeqas','dastdas','dauksdas']
-Temperature= [tempmin]
-plt.plot(Time2020,tempmin)
-plt.title('Temperature 2020')
-plt.xlabel('Time2020')
-plt.ylabel('Temperature')
-plt.show()
-
+            counter= counter-1
+            print (tempmin)    
+        if (counter== 1):
+            break
+#Time2020=['January','February','asdad','dadas' ,'dasds','dasddsas','dasfdas','dasdahs','dasdtas','dasdeqas','dastdas','dauksdas']
+#Temperature= [tempmin]
+#plt.plot(Time2020,tempmin)
+#plt.title('Temperature 2020')
+#plt.xlabel('Time2020')
+#plt.ylabel('Temperature')
+#plt.show()
 
 
 #menu 
