@@ -19,6 +19,8 @@ with open(filename, 'r') as csvfile:
             print (tempmin2020)    
         if (counter== 1):
             break
+#setting up the size of chart
+plt.figure(figsize=(12,5))
 #pyplot setting up the x-axis and y-axis            
 Time2020=['January','February','March','April' ,'May','June','July','August','September','October','November','December']
 Temperature= [tempmin2020]
@@ -38,7 +40,9 @@ with open(filename, 'r') as csvfile:
        
         if (row[0] == 'Average2019 '):
             tempmin2019.append(row[2])
-            print (tempmin2019)    
+            print (tempmin2019) 
+#setting up the size of chart
+plt.figure(figsize=(12,5))
 #pyplot setting up the x-axis and y-axis             
 Time2020=['January','February','March','April' ,'May','June','July','August','September','October','November','December']
 Temperature= [tempmin2019]
