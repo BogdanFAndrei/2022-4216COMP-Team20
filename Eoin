@@ -1,4 +1,4 @@
-def light_theme():
+def lightmode_theme():
     listbox_tasks.config(bg="white", fg="black")
     button_add_task.config(highlightbackground='white')
     button_delete_task.config(highlightbackground='white')
@@ -6,7 +6,7 @@ def light_theme():
     button_save_tasks.config(highlightbackground='white')
     entry_task.config(bg='white', fg='black')
 
-def dark_theme():
+def darkmode_theme():
     color = '#1f1f1f'
     listbox_tasks.config(bg=color, fg="white")
     button_add_task.config(highlightbackground=color)
@@ -17,5 +17,5 @@ def dark_theme():
 
 Def_Btn = tk.Button(app, text='Light mode', command=light_theme)
 Def_Btn.pack()
-Themed_Btn = ttk.Button(app, text='Night mode', command=dark_theme)
+Themed_Btn = ttk.Button(app, text='Dark mode', command=dark_theme)
 Themed_Btn.pack()
