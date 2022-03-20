@@ -1,4 +1,4 @@
-from multiprocessing.spawn import spawn_main
+from cProfile import label
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
@@ -14,85 +14,88 @@ start.configure(background="darkgrey")
 #Creates Headline for Intro
 ttk.Label(start, text = "Welcome to Weather + Climate", 
           background = 'black', foreground ="white", 
-          font = ("Times New Roman", 15)).grid(row = 2, column = 5)
+          font = ("Times New Roman", 10)).grid(row = 8, column = 100)
 
 #Function for start button
-def menu ():
-    menu = Tk()
-    menu.title("Main Menu")
-    menu.geometry('500x320')
-    menu.configure(background="green")
+def main ():
+    mai = Tk()
+    mai.title("Main Menu")
+    mai.geometry('500x320')
+    mai.configure(background="green")
     start.destroy()
     
-    #Lable for Main Menu
-    ttk.Label(menu, text = "Main Menu", 
+    #Label for Main Menu
+    mainlabel = ttk.Label(mai, text = "Main Menu", 
           background = 'black', foreground ="white", 
-          font = ("Times New Roman", 15)).grid(row = 0, column = 2)
+          font = ("Times New Roman", 15))
+          
+    mainlabel.place(x=200, y=10)
 
-    ttk.Label(menu, text = "Main Menu", 
+    #Option 1
+    ml1 = ttk.Label(mai, text = "Main Menu", 
           background = 'black', foreground ="white", 
-          font = ("Times New Roman", 10)).grid(row = 1, column = 1)
-    ttk.Label(menu, text = "Main Menu", 
-          background = 'black', foreground ="white", 
-          font = ("Times New Roman", 10)).grid(row = 2, column = 1)
-    ttk.Label(menu, text = "Main Menu", 
-          background = 'black', foreground ="white", 
-          font = ("Times New Roman", 10)).grid(row = 3, column = 1)
+          font = ("Times New Roman", 15))      
+    ml1.place(x=200, y=50)
 
-    ttk.Label(menu, text = "Main Menu", 
-          background = 'black', foreground ="white", 
-          font = ("Times New Roman", 10)).grid(row = 4, column = 1)
-    ttk.Label(menu, text = "Main Menu", 
-          background = 'black', foreground ="white", 
-          font = ("Times New Roman", 10)).grid(row = 5, column = 1)
-    ttk.Label(menu, text = "Main Menu", 
-          background = 'black', foreground ="white", 
-          font = ("Times New Roman", 10)).grid(row = 6, column = 1)
-    ttk.Label(menu, text = "Main Menu", 
-          background = 'black', foreground ="white", 
-          font = ("Times New Roman", 10)).grid(row = 7, column = 1)
-    ttk.Label(menu, text = "Main Menu", 
-          background = 'black', foreground ="white", 
-          font = ("Times New Roman", 10)).grid(row = 8, column = 1)
-    ttk.Label(menu, text = "Main Menu", 
-          background = 'black', foreground ="white", 
-          font = ("Times New Roman", 10)).grid(row = 9, column = 1)
-
-    #Button1 Option 1
-    Button(menu,text="Temperature (Degrees F)", width=20, command=op1) .grid(row=1,column=0,sticky=W)
-
-    #Button2 Option 2
-    Button(menu,text="Drew Point (Degrees F)", width=20, command=op2) .grid(row=3,column=0,sticky=W)
-
-    #Button3 Option 3
-    Button(menu,text="Humidity (%)", width=20, command=op3) .grid(row=5,column=0,sticky=W)
-
-    #Button4 Option 4
-    Button(menu,text="Wind Speed (mph)", width=20, command=op4) .grid(row=7,column=0,sticky=W)
-
-    #Button5 Option 5
-    Button(menu,text="Pressure (Hg)", width=20, command=op5) .grid(row=9,column=0,sticky=W)
+    btn1 = Button(mai,text="Temperature (Degrees F)", width=20, command=op1)
+    btn1.place(x=10, y=50)
     
-    menu.mainloop()
+    #Option 2
+    ml2 = ttk.Label(mai, text = "Main Menu", 
+          background = 'black', foreground ="white", 
+          font = ("Times New Roman", 15))      
+    ml2.place(x=200, y=100)
+
+    btn2 = Button(mai,text="Drew Point (Degrees F)", width=20, command=op2)
+    btn2.place(x=10, y=100)
+
+    #Option 3
+    ml3 = ttk.Label(mai, text = "Main Menu", 
+          background = 'black', foreground ="white", 
+          font = ("Times New Roman", 15))      
+    ml3.place(x=200, y=150)
+
+    btn3 =Button(mai,text="Humidity (%)", width=20, command=op3)
+    btn3.place(x=10, y=150)
+
+    #Option 4
+    ml4 = ttk.Label(mai, text = "Main Menu", 
+          background = 'black', foreground ="white", 
+          font = ("Times New Roman", 15))      
+    ml4.place(x=200, y=200)
+    
+    btn4 =Button(mai,text="Wind Speed (mph)", width=20, command=op4)
+    btn4.place(x=10, y=200)
+
+    #Option 5
+    ml5 = ttk.Label(mai, text = "Main Menu", 
+          background = 'black', foreground ="white", 
+          font = ("Times New Roman", 15))      
+    ml5.place(x=200, y=250)
+    
+    btn5 =Button(mai,text="Pressure (Hg)", width=20, command=op5)
+    btn5.place(x=10, y=250)
+    
+    mai.mainloop()
 
 #Adding Function for start Button
-Button(start,text="Click to start", width=8, command=menu) .grid(row=4,column=4,sticky=W)
+Button(start,text="Click to start", width=8, command=main,) .grid(row=4,column=4,sticky=W)
+
 #Option 1 Function
 def op1 ():
     op1 = Tk()
     op1.title("Temperature (Degrees F)")
     op1.geometry('500x320')
     op1.configure(background="blue")
-    menu.main.destroy()
 
     ttk.Label(op1, text = "Temperature (Degrees F)", 
-        background = 'black', foreground ="white", 
-        font = ("Times New Roman", 15)).grid(row = 0, column = 1)
+          background = 'black', foreground ="white", 
+          font = ("Times New Roman", 15)).grid(row = 0, column = 1)
 
-    # label max/average/min 
+# label max/average/min 
     ttk.Label(op1, text = "Select the Year :",
-        font = ("Times New Roman", 10)).grid(column = 0,
-        row = 5, padx = 10, pady = 25)  
+          font = ("Times New Roman", 10)).grid(column = 0,
+          row = 5, padx = 10, pady = 25)  
 
 # Combobox creation
     n = tk.StringVar()
@@ -153,7 +156,7 @@ def op1 ():
     typevalue.grid(column = 1, row = 7)
     typevalue.current()
 
-#Submitbutton function
+#Submitbutton function +++++ Function for finding data
     def click ():
      MyLabel=Label(op1, text="Look! I clicked on a Button!!")
      MyLabel.pack
@@ -251,7 +254,6 @@ def op2 ():
 
 #add exit button
     Button(op2,text="Quit", width=6, command=op2.destroy) .grid(row=8,column=2,sticky=W)
-    
     
     op2.mainloop()
 
