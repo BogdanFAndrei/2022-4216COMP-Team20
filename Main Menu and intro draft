@@ -9,12 +9,34 @@ from setuptools import Command
 start = Tk()
 start.title("Climate and Weather Team 20")
 start.geometry('500x320')
-start.configure(background="darkgrey")
+start.configure(background="darkgreen")
 
 #Creates Headline for Intro
-ttk.Label(start, text = "Welcome to Weather + Climate", 
+start1 = ttk.Label(start, text = "Welcome to Weather + Climate", 
           background = 'black', foreground ="white", 
-          font = ("Times New Roman", 10)).grid(row = 8, column = 100)
+          font = ("Times New Roman", 10))
+start1.place(x = 150, y = 10)
+
+start2 = ttk.Label(start, text = "This system is designed to provide data on the weather and climate in liverpool." 
++ "\r\n" + 
+"This was designed and created by:"
++ "\r\n" +
+"Ryan Hacine-Bacha"
++ "\r\n" +
+"Bogdan"
++ "\r\n" +
+"Eoin Boyle"
++ "\r\n" +
+"Lukas Holba"
++ "\r\n" +
+"?"
++ "\r\n" +
+"?"
++ "\r\n" +
+"Once you hit the start button you will be able to pick out our many features. ",
+          background = 'White', foreground ="Black", 
+          font = ("Times New Roman", 8))
+start2.place(x = 40, y = 35)
 
 #Function for start button
 def main ():
@@ -27,12 +49,11 @@ def main ():
     #Label for Main Menu
     mainlabel = ttk.Label(mai, text = "Main Menu", 
           background = 'black', foreground ="white", 
-          font = ("Times New Roman", 15))
-          
+          font = ("Times New Roman", 15))      
     mainlabel.place(x=200, y=10)
 
     #Option 1
-    ml1 = ttk.Label(mai, text = "Main Menu", 
+    ml1 = ttk.Label(mai, text = "Temperature", 
           background = 'black', foreground ="white", 
           font = ("Times New Roman", 15))      
     ml1.place(x=200, y=50)
@@ -41,7 +62,7 @@ def main ():
     btn1.place(x=10, y=50)
     
     #Option 2
-    ml2 = ttk.Label(mai, text = "Main Menu", 
+    ml2 = ttk.Label(mai, text = "Drew Point", 
           background = 'black', foreground ="white", 
           font = ("Times New Roman", 15))      
     ml2.place(x=200, y=100)
@@ -50,7 +71,7 @@ def main ():
     btn2.place(x=10, y=100)
 
     #Option 3
-    ml3 = ttk.Label(mai, text = "Main Menu", 
+    ml3 = ttk.Label(mai, text = "Humidity (%)", 
           background = 'black', foreground ="white", 
           font = ("Times New Roman", 15))      
     ml3.place(x=200, y=150)
@@ -59,27 +80,28 @@ def main ():
     btn3.place(x=10, y=150)
 
     #Option 4
-    ml4 = ttk.Label(mai, text = "Main Menu", 
+    ml4 = ttk.Label(mai, text = "Wind Speed (mph)", 
           background = 'black', foreground ="white", 
           font = ("Times New Roman", 15))      
     ml4.place(x=200, y=200)
     
-    btn4 =Button(mai,text="Wind Speed (mph)", width=20, command=op4)
+    btn4 = Button(mai,text="Wind Speed (mph)", width=20, command=op4)
     btn4.place(x=10, y=200)
 
     #Option 5
-    ml5 = ttk.Label(mai, text = "Main Menu", 
+    ml5 = ttk.Label(mai, text = "Pressure (Hg)", 
           background = 'black', foreground ="white", 
           font = ("Times New Roman", 15))      
     ml5.place(x=200, y=250)
     
-    btn5 =Button(mai,text="Pressure (Hg)", width=20, command=op5)
+    btn5 = Button(mai,text="Pressure (Hg)", width=20, command=op5)
     btn5.place(x=10, y=250)
     
     mai.mainloop()
 
 #Adding Function for start Button
-Button(start,text="Click to start", width=8, command=main,) .grid(row=4,column=4,sticky=W)
+bntStart1 = Button(start,text="Click to start", width=15, command=main)
+bntStart1.place(x=180, y=285)
 
 #Option 1 Function
 def op1 ():
