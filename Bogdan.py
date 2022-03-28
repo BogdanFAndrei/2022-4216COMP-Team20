@@ -850,8 +850,31 @@ typevalue.current()
 
 #Submitbutton function
 def click ():
-    MyLabel=Label(window, text="Look! I clicked on a Button!!")
-    MyLabel.pack
+    def save_info ():
+    value=typevalue.get()
+    value2=yearchoosen.get()
+    if value == " Minimum" and value2==" 2020":
+        with open(filename, 'r') as csvfile:
+            datareader = csv.reader(csvfile)
+            tempmin2020 = []
+           
+    
+            for row in datareader:
+                
+                if (row[0] == 'Average2020'):
+                    tempmin2020.append(float(row[2]))
+                   
+                    print (tempmin2020)    
+         
+    plt.figure(figsize=(12,5))
+    Time2020=['January','February','March','April' ,'May','June','July','August','September','October','November','December']
+    Temperature= [tempmin2020]
+    plt.plot(Time2020,tempmin2020, '-ok',color='green',linestyle='dashed',markerfacecolor='blue')
+    plt.grid(axis= 'y')
+    plt.title('Maximum Temperature 2020')
+    plt.xlabel('Month')
+    plt.ylabel('Value')
+    plt.show()
 #addbutton 
 Button(window,text="Submit", width=6, command=click) .grid(row=8,column=1,sticky=W)
 
