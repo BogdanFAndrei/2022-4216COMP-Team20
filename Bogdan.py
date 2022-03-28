@@ -7,767 +7,83 @@ import itertools
 
 filename = 'FinallOneCSV.csv'
 
-print ('-------------------------------------------- 2020')
+def getYearData(year, data_type, value_type):
+    filename = 'FinallOneCSV.csv'
+    with open(filename, 'r') as csvfile:
+        datareader = csv.reader(csvfile)
+        yearData = []
+        for row in datareader:
+            if row[0].find('Average'+str(year)) != -1:
+                if(data_type == 'temperature'):
+                    if(value_type == 'Maximum'):
+                        yearData.append(float(row[2]))
+                    elif(value_type == 'Average'):
+                        yearData.append(float(row[3]))
+                    elif(value_type == 'Minimum'):
+                        yearData.append(float(row[4]))
+                elif(data_type == 'dew'):
+                    if(value_type == 'Maximum'):
+                        yearData.append(float(row[5]))
+                    elif(value_type == 'Average'):
+                        yearData.append(float(row[6]))
+                    elif(value_type == 'Minimum'):
+                        yearData.append(float(row[7]))
+                elif(data_type == 'humidity'):
+                    if(value_type == 'Maximum'):
+                        yearData.append(float(row[8]))
+                    elif(value_type == 'Average'):
+                        yearData.append(float(row[9]))
+                    elif(value_type == 'Minimum'):
+                        yearData.append(float(row[10]))
+                elif(data_type == 'wind'):
+                    if(value_type == 'Maximum'):
+                        yearData.append(float(row[11]))
+                    elif(value_type == 'Average'):
+                        yearData.append(float(row[12]))
+                    elif(value_type == 'Minimum'):
+                        yearData.append(float(row[13]))
+                elif(data_type == 'pressure'):
+                    if(value_type == 'Maximum'):
+                        yearData.append(float(row[14]))
+                    elif(value_type == 'Average'):
+                        yearData.append(float(row[15]))
+                    elif(value_type == 'Minimum'):
+                        yearData.append(float(row[16]))
+    return yearData
+def makePlot( year_a, data_type, value_type):
 
-
-
-#2020 maximum temperature
-with open(filename, 'r') as csvfile:
-    datareader = csv.reader(csvfile)
-    tempmin2020 = []
-    counter = 0
-    rowCounter = 1
+    year_a_data = getYearData(year_a, data_type, value_type)
     
-    for row in datareader:
-        rowCounter=rowCounter+1
-        if (row[0] == 'Average2020'):
-            tempmin2020.append(float(row[2]))
-            counter= counter-1
-            print (tempmin2020)    
-        if (counter== 12): 
-            break 
-plt.figure(figsize=(12,5))
-Time2020=['January','February','March','April' ,'May','June','July','August','September','October','November','December']
-Temperature= [tempmin2020]
-plt.plot(Time2020,tempmin2020, '-ok',color='green',linestyle='dashed',markerfacecolor='blue')
-plt.grid(axis= 'y')
-plt.title('Maximum Temperature 2020')
-plt.xlabel('Month')
-plt.ylabel('Temperature (° F)')
-plt.show()
 
-#2020 average temperature
-with open(filename, 'r') as csvfile:
-    datareader = csv.reader(csvfile)
-    tempavg2020 = []
-    counter = 0
-    rowCounter = 1
+    month_labels =['January','February','March','April' ,'May','June','July','August','September','October','November','December']
+    plt.figure(figsize=(12,5))
+
+    plt.plot(month_labels,year_a_data, '-ok',color='green',linestyle='dashed',markerfacecolor='green')
+    plt.grid(axis= 'y')
+    plt.title(str(year_a))
+    plt.xlabel('Month')
+    plt.ylabel(data_type + " " + value_type)
+    plt.show()
     
-    for row in datareader:
-        rowCounter=rowCounter+1
-        if (row[0] == 'Average2020'):
-            tempavg2020.append(float(row[3]))
-            counter= counter-1
-            print (tempavg2020)    
-        if (counter== 12): 
-            break 
-plt.figure(figsize=(12,5))
-Time2020=['January','February','March','April' ,'May','June','July','August','September','October','November','December']
-Temperature= [tempavg2020]
-plt.plot(Time2020,tempmin2020, '-ok',color='green',linestyle='dashed',markerfacecolor='blue')
-plt.grid(axis= 'y')
-plt.title('Average Temperature 2020')
-plt.xlabel('Month')
-plt.ylabel('Temperature (° F)')
-plt.show()
-
-#2020 minimum temperature
-with open(filename, 'r') as csvfile:
-    datareader = csv.reader(csvfile)
-    tempmin2020 = []
-    counter = 0
-    rowCounter = 1
-    
-    for row in datareader:
-        rowCounter=rowCounter+1
-        if (row[0] == 'Average2020'):
-            tempmin2020.append(float(row[4]))
-            counter= counter-1
-            print (tempmin2020)    
-        if (counter== 12): 
-            break 
-plt.figure(figsize=(12,5))
-Time2020=['January','February','March','April' ,'May','June','July','August','September','October','November','December']
-Temperature= [tempmin2020]
-plt.plot(Time2020,tempmin2020, '-ok',color='green',linestyle='dashed',markerfacecolor='blue')
-plt.grid(axis= 'y')
-plt.title('Minimum Temperature 2020')
-plt.xlabel('Month')
-plt.ylabel('Temperature (° F)')
-plt.show()
-
-print ('-------------------------------------------- DewPoint 2020')
-#2020 maximum dew point
-with open(filename, 'r') as csvfile:
-    datareader = csv.reader(csvfile)
-    tempmin2020 = []
-    counter = 0
-    rowCounter = 1
-    
-    for row in datareader:
-        rowCounter=rowCounter+1
-        if (row[0] == 'Average2020'):
-            tempmin2020.append(float(row[5]))
-            counter= counter-1
-            print (tempmin2020)    
-        if (counter== 12): 
-            break 
-plt.figure(figsize=(12,5))
-Time2020=['January','February','March','April' ,'May','June','July','August','September','October','November','December']
-Temperature= [tempmin2020]
-plt.plot(Time2020,tempmin2020, '-ok',color='green',linestyle='dashed',markerfacecolor='blue')
-plt.grid(axis= 'y')
-plt.title('Maximum Dew Point 2020')
-plt.xlabel('Month')
-plt.ylabel('Dew Point (° F)')
-plt.show()
-
-#2020 average dew point
-with open(filename, 'r') as csvfile:
-    datareader = csv.reader(csvfile)
-    tempmin2020 = []
-    counter = 0
-    rowCounter = 1
-    
-    for row in datareader:
-        rowCounter=rowCounter+1
-        if (row[0] == 'Average2020'):
-            tempmin2020.append(float(row[6]))
-            counter= counter-1
-            print (tempmin2020)    
-        if (counter== 12): 
-            break 
-plt.figure(figsize=(12,5))
-Time2020=['January','February','March','April' ,'May','June','July','August','September','October','November','December']
-Temperature= [tempmin2020]
-plt.plot(Time2020,tempmin2020, '-ok',color='green',linestyle='dashed',markerfacecolor='blue')
-plt.grid(axis= 'y')
-plt.title('Average Dew Point 2020')
-plt.xlabel('Month')
-plt.ylabel('Dew Point (° F)')
-plt.show()
-
-#2020 minimum dew point
-with open(filename, 'r') as csvfile:
-    datareader = csv.reader(csvfile)
-    tempmin2020 = []
-    counter = 0
-    rowCounter = 1
-    
-    for row in datareader:
-        rowCounter=rowCounter+1
-        if (row[0] == 'Average2020'):
-            tempmin2020.append(float(row[7]))
-            counter= counter-1
-            print (tempmin2020)    
-        if (counter== 12): 
-            break 
-plt.figure(figsize=(12,5))
-Time2020=['January','February','March','April' ,'May','June','July','August','September','October','November','December']
-Temperature= [tempmin2020]
-plt.plot(Time2020,tempmin2020, '-ok',color='green',linestyle='dashed',markerfacecolor='blue')
-plt.grid(axis= 'y')
-plt.title('Minimum Temperature 2020')
-plt.xlabel('Month')
-plt.ylabel('Dew Point (° F)')
-plt.show()
-
-#2020 maximum humidity
-with open(filename, 'r') as csvfile:
-    datareader = csv.reader(csvfile)
-    tempmin2020 = []
-    counter = 0
-    rowCounter = 1
-    
-    for row in datareader:
-        rowCounter=rowCounter+1
-        if (row[0] == 'Average2020'):
-            tempmin2020.append(float(row[8]))
-            counter= counter-1
-            print (tempmin2020)    
-        if (counter== 12): 
-            break 
-plt.figure(figsize=(12,5))
-Time2020=['January','February','March','April' ,'May','June','July','August','September','October','November','December']
-Temperature= [tempmin2020]
-plt.plot(Time2020,tempmin2020, '-ok',color='green',linestyle='dashed',markerfacecolor='blue')
-plt.grid(axis= 'y')
-plt.title('Maximum Dew Point 2020')
-plt.xlabel('Month')
-plt.ylabel('Humidity (%)')
-plt.show()
-
-#2020 average humidity
-with open(filename, 'r') as csvfile:
-    datareader = csv.reader(csvfile)
-    tempmin2020 = []
-    counter = 0
-    rowCounter = 1
-    
-    for row in datareader:
-        rowCounter=rowCounter+1
-        if (row[0] == 'Average2020'):
-            tempmin2020.append(float(row[9]))
-            counter= counter-1
-            print (tempmin2020)    
-        if (counter== 12): 
-            break 
-plt.figure(figsize=(12,5))
-Time2020=['January','February','March','April' ,'May','June','July','August','September','October','November','December']
-Temperature= [tempmin2020]
-plt.plot(Time2020,tempmin2020, '-ok',color='green',linestyle='dashed',markerfacecolor='blue')
-plt.grid(axis= 'y')
-plt.title('Average Humidity 2020')
-plt.xlabel('Month')
-plt.ylabel('Humidity (%)')
-plt.show()
-
-#2020 minimum humidity
-with open(filename, 'r') as csvfile:
-    datareader = csv.reader(csvfile)
-    tempmin2020 = []
-    counter = 0
-    rowCounter = 1
-    
-    for row in datareader:
-        rowCounter=rowCounter+1
-        if (row[0] == 'Average2020'):
-            tempmin2020.append(float(row[10]))
-            counter= counter-1
-            print (tempmin2020)    
-        if (counter== 12): 
-            break 
-plt.figure(figsize=(12,5))
-Time2020=['January','February','March','April' ,'May','June','July','August','September','October','November','December']
-Temperature= [tempmin2020]
-plt.plot(Time2020,tempmin2020, '-ok',color='green',linestyle='dashed',markerfacecolor='blue')
-plt.grid(axis= 'y')
-plt.title('Minimum Humidity 2020')
-plt.xlabel('Month')
-plt.ylabel('Humidity (%)')
-plt.show()
-
-#2020 maximum wind speed
-with open(filename, 'r') as csvfile:
-    datareader = csv.reader(csvfile)
-    tempmin2020 = []
-    counter = 0
-    rowCounter = 1
-    
-    for row in datareader:
-        rowCounter=rowCounter+1
-        if (row[0] == 'Average2020'):
-            tempmin2020.append(float(row[11]))
-            counter= counter-1
-            print (tempmin2020)    
-        if (counter== 12): 
-            break 
-plt.figure(figsize=(12,5))
-Time2020=['January','February','March','April' ,'May','June','July','August','September','October','November','December']
-Temperature= [tempmin2020]
-plt.plot(Time2020,tempmin2020, '-ok',color='green',linestyle='dashed',markerfacecolor='blue')
-plt.grid(axis= 'y')
-plt.title('Maximum Wind Speed 2020')
-plt.xlabel('Month')
-plt.ylabel('Wind Speed (mph)')
-plt.show()
-
-#2020 average wind speed
-with open(filename, 'r') as csvfile:
-    datareader = csv.reader(csvfile)
-    tempmin2020 = []
-    counter = 0
-    rowCounter = 1
-    
-    for row in datareader:
-        rowCounter=rowCounter+1
-        if (row[0] == 'Average2020'):
-            tempmin2020.append(float(row[12]))
-            counter= counter-1
-            print (tempmin2020)    
-        if (counter== 12): 
-            break 
-plt.figure(figsize=(12,5))
-Time2020=['January','February','March','April' ,'May','June','July','August','September','October','November','December']
-Temperature= [tempmin2020]
-plt.plot(Time2020,tempmin2020, '-ok',color='green',linestyle='dashed',markerfacecolor='blue')
-plt.grid(axis= 'y')
-plt.title('Average Wind Speed 2020')
-plt.xlabel('Month')
-plt.ylabel('Wind Speed (mph)')
-plt.show()
-
-#2020 minimum wind speed
-with open(filename, 'r') as csvfile:
-    datareader = csv.reader(csvfile)
-    tempmin2020 = []
-    counter = 0
-    rowCounter = 1
-    
-    for row in datareader:
-        rowCounter=rowCounter+1
-        if (row[0] == 'Average2020'):
-            tempmin2020.append(float(row[13]))
-            counter= counter-1
-            print (tempmin2020)    
-        if (counter== 12): 
-            break 
-plt.figure(figsize=(12,5))
-Time2020=['January','February','March','April' ,'May','June','July','August','September','October','November','December']
-Temperature= [tempmin2020]
-list1, list2 = zip(*sorted(zip(Time2020, Temperature)))
-plt.plot(Time2020,tempmin2020, '-ok',color='green',linestyle='dashed',markerfacecolor='blue')
-plt.grid(axis= 'y')
-plt.title('Minimum Wind Speed 2020')
-plt.xlabel('Month')
-plt.ylabel('Wind Speed (mph)')
-plt.show()
-
-#2020 maximum pressure
-with open(filename, 'r') as csvfile:
-    datareader = csv.reader(csvfile)
-    tempmin2020 = []
-    counter = 0
-    rowCounter = 1
-    
-    for row in datareader:
-        rowCounter=rowCounter+1
-        if (row[0] == 'Average2020'):
-            tempmin2020.append(float(row[14]))
-            counter= counter-1
-            print (tempmin2020)    
-        if (counter== 12): 
-            break 
-plt.figure(figsize=(12,5))
-Time2020=['January','February','March','April' ,'May','June','July','August','September','October','November','December']
-Temperature= [tempmin2020]
-plt.plot(Time2020,tempmin2020, '-ok',color='green',linestyle='dashed',markerfacecolor='blue')
-plt.grid(axis= 'y')
-plt.title('Maximum Pressure 2020')
-plt.xlabel('Month')
-plt.ylabel('Pressure (Hg)')
-plt.show()
-
-#2020 average pressure
-with open(filename, 'r') as csvfile:
-    datareader = csv.reader(csvfile)
-    tempmin2020 = []
-    counter = 0
-    rowCounter = 1
-    
-    for row in datareader:
-        rowCounter=rowCounter+1
-        if (row[0] == 'Average2020'):
-            tempmin2020.append(float(row[15]))
-            counter= counter-1
-            print (tempmin2020)    
-        if (counter== 12): 
-            break 
-plt.figure(figsize=(12,5))
-Time2020=['January','February','March','April' ,'May','June','July','August','September','October','November','December']
-Temperature= [tempmin2020]
-plt.plot(Time2020,tempmin2020, '-ok',color='green',linestyle='dashed',markerfacecolor='blue')
-plt.grid(axis= 'y')
-plt.title('Average Pressure 2020')
-plt.xlabel('Month')
-plt.ylabel('Pressure (Hg)')
-plt.show()
-
-#2020 minimum pressure
-with open(filename, 'r') as csvfile:
-    datareader = csv.reader(csvfile)
-    tempmin2020 = []
-    counter = 0
-    rowCounter = 1
-    
-    for row in datareader:
-        rowCounter=rowCounter+1
-        if (row[0] == 'Average2020'):
-            tempmin2020.append(float(row[16]))
-            counter= counter-1
-            print (tempmin2020)    
-        if (counter== 12): 
-            break 
-plt.figure(figsize=(12,5))
-Time2020=['January','February','March','April' ,'May','June','July','August','September','October','November','December']
-Temperature= [tempmin2020]
-plt.plot(Time2020,tempmin2020, '-ok',color='green',linestyle='dashed',markerfacecolor='blue')
-plt.grid(axis= 'y')
-plt.title('Minimum Pressure 2020')
-plt.xlabel('Month')
-plt.ylabel('Pressure (Hg)')
-plt.show()
-
-print ('------------------------------------------------------------------------------------------------------- 2019')
 
 
+#function for submit button
+    def click1():
+        year_a = yearchoosen.get()
+        value_type = typevalue.get()
+        data_type='temperature'
+       
+        
+        makePlot(year_a,data_type,value_type)
+        
+    def click2():
+        year_a = yearchoosen.get()
+        value_type = typevalue.get()
+        data_type='DewPoint'
+       
+        
+        makePlot(year_a,data_type,value_type)
 
-#2019 maximum temperature
-with open(filename, 'r') as csvfile:
-    datareader = csv.reader(csvfile)
-    tempmin2020 = []
-    counter = 0
-    rowCounter = 1
-    
-    for row in datareader:
-        rowCounter=rowCounter+1
-        if (row[0] == 'Average2019'):
-            tempmin2020.append(float(row[2]))
-            counter= counter-1
-            print (tempmin2020)    
-        if (counter== 12): 
-            break 
-plt.figure(figsize=(12,5))
-Time2020=['January','February','March','April' ,'May','June','July','August','September','October','November','December']
-Temperature= [tempmin2020]
-plt.plot(Time2020,tempmin2020, '-ok',color='green',linestyle='dashed',markerfacecolor='blue')
-plt.grid(axis= 'y')
-plt.title('Maximum Temperature 2019')
-plt.xlabel('Month')
-plt.ylabel('Temperature (° F)')
-plt.show()
-
-#2019 average temperature
-with open(filename, 'r') as csvfile:
-    datareader = csv.reader(csvfile)
-    tempavg2020 = []
-    counter = 0
-    rowCounter = 1
-    
-    for row in datareader:
-        rowCounter=rowCounter+1
-        if (row[0] == 'Average2019'):
-            tempavg2020.append(float(row[3]))
-            counter= counter-1
-            print (tempavg2020)    
-        if (counter== 12): 
-            break 
-plt.figure(figsize=(12,5))
-Time2020=['January','February','March','April' ,'May','June','July','August','September','October','November','December']
-Temperature= [tempavg2020]
-plt.plot(Time2020,tempmin2020, '-ok',color='green',linestyle='dashed',markerfacecolor='blue')
-plt.grid(axis= 'y')
-plt.title('Average Temperature 2019')
-plt.xlabel('Month')
-plt.ylabel('Temperature (° F)')
-plt.show()
-
-#2019 minimum temperature
-with open(filename, 'r') as csvfile:
-    datareader = csv.reader(csvfile)
-    tempmin2020 = []
-    counter = 0
-    rowCounter = 1
-    
-    for row in datareader:
-        rowCounter=rowCounter+1
-        if (row[0] == 'Average2019'):
-            tempmin2020.append(float(row[4]))
-            counter= counter-1
-            print (tempmin2020)    
-        if (counter== 12): 
-            break 
-plt.figure(figsize=(12,5))
-Time2020=['January','February','March','April' ,'May','June','July','August','September','October','November','December']
-Temperature= [tempmin2020]
-plt.plot(Time2020,tempmin2020, '-ok',color='green',linestyle='dashed',markerfacecolor='blue')
-plt.grid(axis= 'y')
-plt.title('Minimum Temperature 2019')
-plt.xlabel('Month')
-plt.ylabel('Temperature (° F)')
-plt.show()
-
-print ('-------------------------------------------- DewPoint 2019')
-#2019 maximum dew point
-with open(filename, 'r') as csvfile:
-    datareader = csv.reader(csvfile)
-    tempmin2020 = []
-    counter = 0
-    rowCounter = 1
-    
-    for row in datareader:
-        rowCounter=rowCounter+1
-        if (row[0] == 'Average2019'):
-            tempmin2020.append(float(row[5]))
-            counter= counter-1
-            print (tempmin2020)    
-        if (counter== 12): 
-            break 
-plt.figure(figsize=(12,5))
-Time2020=['January','February','March','April' ,'May','June','July','August','September','October','November','December']
-Temperature= [tempmin2020]
-plt.plot(Time2020,tempmin2020, '-ok',color='green',linestyle='dashed',markerfacecolor='blue')
-plt.grid(axis= 'y')
-plt.title('Maximum Dew Point 2019')
-plt.xlabel('Month')
-plt.ylabel('Dew Point (° F)')
-plt.show()
-
-#2019 average dew point
-with open(filename, 'r') as csvfile:
-    datareader = csv.reader(csvfile)
-    tempmin2020 = []
-    counter = 0
-    rowCounter = 1
-    
-    for row in datareader:
-        rowCounter=rowCounter+1
-        if (row[0] == 'Average2019'):
-            tempmin2020.append(float(row[6]))
-            counter= counter-1
-            print (tempmin2020)    
-        if (counter== 12): 
-            break 
-plt.figure(figsize=(12,5))
-Time2020=['January','February','March','April' ,'May','June','July','August','September','October','November','December']
-Temperature= [tempmin2020]
-plt.plot(Time2020,tempmin2020, '-ok',color='green',linestyle='dashed',markerfacecolor='blue')
-plt.grid(axis= 'y')
-plt.title('Average Dew Point 2019')
-plt.xlabel('Month')
-plt.ylabel('Dew Point (° F)')
-plt.show()
-
-#2019 minimum dew point
-with open(filename, 'r') as csvfile:
-    datareader = csv.reader(csvfile)
-    tempmin2020 = []
-    counter = 0
-    rowCounter = 1
-    
-    for row in datareader:
-        rowCounter=rowCounter+1
-        if (row[0] == 'Average2019'):
-            tempmin2020.append(float(row[7]))
-            counter= counter-1
-            print (tempmin2020)    
-        if (counter== 12): 
-            break 
-plt.figure(figsize=(12,5))
-Time2020=['January','February','March','April' ,'May','June','July','August','September','October','November','December']
-Temperature= [tempmin2020]
-plt.plot(Time2020,tempmin2020, '-ok',color='green',linestyle='dashed',markerfacecolor='blue')
-plt.grid(axis= 'y')
-plt.title('Minimum Temperature 2020')
-plt.xlabel('Month')
-plt.ylabel('Dew Point (° F)')
-plt.show()
-
-#2019 maximum humidity
-with open(filename, 'r') as csvfile:
-    datareader = csv.reader(csvfile)
-    tempmin2020 = []
-    counter = 0
-    rowCounter = 1
-    
-    for row in datareader:
-        rowCounter=rowCounter+1
-        if (row[0] == 'Average2019'):
-            tempmin2020.append(float(row[8]))
-            counter= counter-1
-            print (tempmin2020)    
-        if (counter== 12): 
-            break 
-plt.figure(figsize=(12,5))
-Time2020=['January','February','March','April' ,'May','June','July','August','September','October','November','December']
-Temperature= [tempmin2020]
-plt.plot(Time2020,tempmin2020, '-ok',color='green',linestyle='dashed',markerfacecolor='blue')
-plt.grid(axis= 'y')
-plt.title('Maximum Dew Point 2019')
-plt.xlabel('Month')
-plt.ylabel('Humidity (%)')
-plt.show()
-
-#2019 average humidity
-with open(filename, 'r') as csvfile:
-    datareader = csv.reader(csvfile)
-    tempmin2020 = []
-    counter = 0
-    rowCounter = 1
-    
-    for row in datareader:
-        rowCounter=rowCounter+1
-        if (row[0] == 'Average2019'):
-            tempmin2020.append(float(row[9]))
-            counter= counter-1
-            print (tempmin2020)    
-        if (counter== 12): 
-            break 
-plt.figure(figsize=(12,5))
-Time2020=['January','February','March','April' ,'May','June','July','August','September','October','November','December']
-Temperature= [tempmin2020]
-plt.plot(Time2020,tempmin2020, '-ok',color='green',linestyle='dashed',markerfacecolor='blue')
-plt.grid(axis= 'y')
-plt.title('Average Humidity 2019')
-plt.xlabel('Month')
-plt.ylabel('Humidity (%)')
-plt.show()
-
-#2019 minimum humidity
-with open(filename, 'r') as csvfile:
-    datareader = csv.reader(csvfile)
-    tempmin2020 = []
-    counter = 0
-    rowCounter = 1
-    
-    for row in datareader:
-        rowCounter=rowCounter+1
-        if (row[0] == 'Average2019'):
-            tempmin2020.append(float(row[10]))
-            counter= counter-1
-            print (tempmin2020)    
-        if (counter== 12): 
-            break 
-plt.figure(figsize=(12,5))
-Time2020=['January','February','March','April' ,'May','June','July','August','September','October','November','December']
-Temperature= [tempmin2020]
-plt.plot(Time2020,tempmin2020, '-ok',color='green',linestyle='dashed',markerfacecolor='blue')
-plt.grid(axis= 'y')
-plt.title('Minimum Humidity 2019')
-plt.xlabel('Month')
-plt.ylabel('Humidity (%)')
-plt.show()
-
-#2019 maximum wind speed
-with open(filename, 'r') as csvfile:
-    datareader = csv.reader(csvfile)
-    tempmin2020 = []
-    counter = 0
-    rowCounter = 1
-    
-    for row in datareader:
-        rowCounter=rowCounter+1
-        if (row[0] == 'Average2019'):
-            tempmin2020.append(float(row[11]))
-            counter= counter-1
-            print (tempmin2020)    
-        if (counter== 12): 
-            break 
-plt.figure(figsize=(12,5))
-Time2020=['January','February','March','April' ,'May','June','July','August','September','October','November','December']
-Temperature= [tempmin2020]
-plt.plot(Time2020,tempmin2020, '-ok',color='green',linestyle='dashed',markerfacecolor='blue')
-plt.grid(axis= 'y')
-plt.title('Maximum Wind Speed 2019')
-plt.xlabel('Month')
-plt.ylabel('Wind Speed (mph)')
-plt.show()
-
-#2019 average wind speed
-with open(filename, 'r') as csvfile:
-    datareader = csv.reader(csvfile)
-    tempmin2020 = []
-    counter = 0
-    rowCounter = 1
-    
-    for row in datareader:
-        rowCounter=rowCounter+1
-        if (row[0] == 'Average2019'):
-            tempmin2020.append(float(row[12]))
-            counter= counter-1
-            print (tempmin2020)    
-        if (counter== 12): 
-            break 
-plt.figure(figsize=(12,5))
-Time2020=['January','February','March','April' ,'May','June','July','August','September','October','November','December']
-Temperature= [tempmin2020]
-plt.plot(Time2020,tempmin2020, '-ok',color='green',linestyle='dashed',markerfacecolor='blue')
-plt.grid(axis= 'y')
-plt.title('Average Wind Speed 2019')
-plt.xlabel('Month')
-plt.ylabel('Wind Speed (mph)')
-plt.show()
-
-#2019 minimum wind speed
-with open(filename, 'r') as csvfile:
-    datareader = csv.reader(csvfile)
-    tempmin2020 = []
-    counter = 0
-    rowCounter = 1
-    
-    for row in datareader:
-        rowCounter=rowCounter+1
-        if (row[0] == 'Average2019'):
-            tempmin2020.append(float(row[13]))
-            counter= counter-1
-            print (tempmin2020)    
-        if (counter== 12): 
-            break 
-plt.figure(figsize=(12,5))
-Time2020=['January','February','March','April' ,'May','June','July','August','September','October','November','December']
-Temperature= [tempmin2020]
-list1, list2 = zip(*sorted(zip(Time2020, Temperature)))
-plt.plot(Time2020,tempmin2020, '-ok',color='green',linestyle='dashed',markerfacecolor='blue')
-plt.grid(axis= 'y')
-plt.title('Minimum Wind Speed 2019')
-plt.xlabel('Month')
-plt.ylabel('Wind Speed (mph)')
-plt.show()
-
-#2019 maximum pressure
-with open(filename, 'r') as csvfile:
-    datareader = csv.reader(csvfile)
-    tempmin2020 = []
-    counter = 0
-    rowCounter = 1
-    
-    for row in datareader:
-        rowCounter=rowCounter+1
-        if (row[0] == 'Average2019'):
-            tempmin2020.append(float(row[14]))
-            counter= counter-1
-            print (tempmin2020)    
-        if (counter== 12): 
-            break 
-plt.figure(figsize=(12,5))
-Time2020=['January','February','March','April' ,'May','June','July','August','September','October','November','December']
-Temperature= [tempmin2020]
-plt.plot(Time2020,tempmin2020, '-ok',color='green',linestyle='dashed',markerfacecolor='blue')
-plt.grid(axis= 'y')
-plt.title('Maximum Pressure 2019')
-plt.xlabel('Month')
-plt.ylabel('Pressure (Hg)')
-plt.show()
-
-#2019 average pressure
-with open(filename, 'r') as csvfile:
-    datareader = csv.reader(csvfile)
-    tempmin2020 = []
-    counter = 0
-    rowCounter = 1
-    
-    for row in datareader:
-        rowCounter=rowCounter+1
-        if (row[0] == 'Average2019'):
-            tempmin2020.append(float(row[15]))
-            counter= counter-1
-            print (tempmin2020)    
-        if (counter== 12): 
-            break 
-plt.figure(figsize=(12,5))
-Time2020=['January','February','March','April' ,'May','June','July','August','September','October','November','December']
-Temperature= [tempmin2020]
-plt.plot(Time2020,tempmin2020, '-ok',color='green',linestyle='dashed',markerfacecolor='blue')
-plt.grid(axis= 'y')
-plt.title('Average Pressure 2019')
-plt.xlabel('Month')
-plt.ylabel('Pressure (Hg)')
-plt.show()
-
-#2019 minimum pressure
-with open(filename, 'r') as csvfile:
-    datareader = csv.reader(csvfile)
-    tempmin2020 = []
-    counter = 0
-    rowCounter = 1
-    
-    for row in datareader:
-        rowCounter=rowCounter+1
-        if (row[0] == 'Average2019'):
-            tempmin2020.append(float(row[16]))
-            counter= counter-1
-            print (tempmin2020)    
-        if (counter== 12): 
-            break 
-plt.figure(figsize=(12,5))
-Time2020=['January','February','March','April' ,'May','June','July','August','September','October','November','December']
-Temperature= [tempmin2020]
-plt.plot(Time2020,tempmin2020, '-ok',color='green',linestyle='dashed',markerfacecolor='blue')
-plt.grid(axis= 'y')
-plt.title('Minimum Pressure 2019')
-plt.xlabel('Month')
-plt.ylabel('Pressure (Hg)')
-plt.show()
 
 
 
