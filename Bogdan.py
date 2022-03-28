@@ -67,7 +67,22 @@ def makePlot( year_a, data_type, value_type):
     
 
 
-
+#function for submit button
+    def click1():
+        year_a = yearchoosen.get()
+        value_type = typevalue.get()
+        data_type='temperature'
+       
+        
+        makePlot(year_a,data_type,value_type)
+        
+    def click2():
+        year_a = yearchoosen.get()
+        value_type = typevalue.get()
+        data_type='DewPoint'
+       
+        
+        makePlot(year_a,data_type,value_type)
 
 
 
