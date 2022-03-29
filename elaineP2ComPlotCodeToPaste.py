@@ -443,7 +443,3 @@ def op5p2 ():
     #Adding submit & exit buttons
     Button(op5p2,text="Submit", width=6, command=clickop5p2) .grid(row=10,column=1,sticky=W)
     Button(op5p2,text="Quit", width=6, command=op5p2.destroy) .grid(row=10,column=2,sticky=W)
-
-    op5p2.mainloop()
-
-start.mainloop()
