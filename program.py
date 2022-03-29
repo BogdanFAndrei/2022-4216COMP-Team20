@@ -561,22 +561,22 @@ def makeComPlot(year, data_type):
     
     # Setting the title and y axis labels
     if (data_type=='temperature'):
-        measurement="(° F)"
+        ylabel="Temperature (° F)"
         title=f"Comparing the maximum, mean & minimum temperature values of {year[0]}, {year[1]} & {year[2]}"
     if (data_type=='DewPoint'):
-        measurement="(° F)"
+        ylabel="Dew Point(° F)"
         title=f"Comparing the maximum, mean & minimum dew point values of {year[0]}, {year[1]} & {year[2]}"
     if (data_type=='Humidity'):
-        measurement="(%)"
+        ylabel="Humidity (%)"
         title=f"Comparing the maximum, mean & minimum humidity values of {year[0]}, {year[1]} & {year[2]}"
     if (data_type=='WindSpeed'):
-        measurement="(mph)"
+        ylabel="Wind Speed (mph)"
         title=f"Comparing the maximum, mean & minimum wind speed values of {year[0]}, {year[1]} & {year[2]}"
     if (data_type=='Pressure'):
-        measurement="(Hg)"
+        ylabel="Pressure(Hg)"
         title=f"Comparing the maximum, mean & minimum pressure values of {year[0]}, {year[1]} & {year[2]}"
     plt.title(title)
-    plt.ylabel(data_type + " " + measurement)
+    plt.ylabel(ylabel)
     
     # Adding vertical lines
     plt.vlines(x=year, ymin=minValuesYear, ymax=[maxValuesYear], colors='black', ls='-', lw=2)
@@ -590,7 +590,7 @@ def makeComPlot(year, data_type):
 
 
 
-years = ['2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020']
+years = ['2009','2010','2011','2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020']
 
 
 # Option 1.2 Function
