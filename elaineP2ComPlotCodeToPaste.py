@@ -1,4 +1,6 @@
-# Testing on actual program
+# Code to paste in to the program
+# Needs to have another section after the user selects the data type (e.g. temperature for example)
+# so the user can select if they want to compare years or a data type for 1 particular year
 
 from cProfile import label
 import tkinter as tk
@@ -11,7 +13,7 @@ from matplotlib.pyplot import figure
 import statistics
 from setuptools import Command
 
-
+# Function to get year data
 def getYearData(year, data_type, value_type):
     filename = 'FinallOneCSV.csv'
     with open(filename, 'r') as csvfile:
@@ -55,22 +57,8 @@ def getYearData(year, data_type, value_type):
                     elif(value_type == 'Minimum'):
                         yearData.append(float(row[16]))
     return yearData
-def makePlot( year_a, data_type, value_type):
 
-    year_a_data = getYearData(year_a, data_type, value_type)
-    
-
-    month_labels =['January','February','March','April' ,'May','June','July','August','September','October','November','December']
-    plt.figure(figsize=(12,5))
-
-    plt.plot(month_labels,year_a_data, '-ok',color='green',linestyle='dashed',markerfacecolor='green')
-    plt.grid(axis= 'y')
-    plt.title(str(year_a))
-    plt.xlabel('Month')
-    plt.ylabel(data_type + " " + value_type)
-    plt.show()
-    
-    # Max temp of the year
+# Finding max temp of a year
 def findMaxValueYear(year_a, data_type):
     maxValueYear=[]
     for year in year_a:
@@ -80,6 +68,7 @@ def findMaxValueYear(year_a, data_type):
 
     return maxValueYear
 
+# Finding mean temp of a year
 def findMeanValueYear(year_a, data_type):
     meanValueYear=[]
     for year in year_a:
@@ -90,7 +79,7 @@ def findMeanValueYear(year_a, data_type):
     return meanValueYear
 
 
-# When you insert a year, data type and value type, itll findthe max for u
+# Finding min temp of a year
 def findMinValueYear(year_a, data_type):
     minValueYear=[]
     for year in year_a:
@@ -101,144 +90,64 @@ def findMinValueYear(year_a, data_type):
     return minValueYear
 
 
-# before setting maxValues array and years array to something    
+# Function to plot all the maxValues
 def plotMaxValueCom(maxValues, years):
-    plt.plot(years,maxValues, '-ok',color='green',linestyle='',markerfacecolor='green')
+    plt.plot(years,maxValues, 'dk',markersize = 10, color='blue',linestyle='',markerfacecolor='blue', label="Maximum")
 
-# before setting meanValues and years to something    
+# Function to plot all the meanValues  
 def plotMeanValueCom(meanValues, years):
-    plt.plot(years,meanValues, '-ok',color='red',linestyle='',markerfacecolor='red')
+    plt.plot(years,meanValues, 'sk',markersize = 10, color='magenta',linestyle='',markerfacecolor='magenta', label="Mean")
 
 
-# before setting minValues and years to something    
+# Function to plot all the minValues   
 def plotMinValueCom(minValues, years):
-    plt.plot(years,minValues, '-ok',color='yellow',linestyle='',markerfacecolor='yellow')
+    plt.plot(years,minValues, 'ok', markersize = 10, color='red',linestyle='',markerfacecolor='red', label="Minimum")
 
 
-# Call the plot. Data_type = 'temperature'
+# Function to make a single comparison graph. Plots for 1 year.
 def makeComPlot(year, data_type):
 
     maxValuesYear = findMaxValueYear(year, data_type)
     meanValuesYear = findMeanValueYear(year, data_type)
     minValuesYear = findMinValueYear(year, data_type)
-
+    
     plt.figure(figsize=(12,5))
     plt.grid(axis= 'y')
     plt.xlabel('Years')
     
-    if (data_type=='temperature') or (data_type=="DewPoint"):
+    # Setting the title and y axis labels
+    if (data_type=='temperature'):
         measurement="(° F)"
+        title=f"Comparing the maximum, mean & minimum temperature values of {year[0]}, {year[1]} & {year[2]}"
+    if (data_type=='DewPoint'):
+        measurement="(° F)"
+        title=f"Comparing the maximum, mean & minimum dew point values of {year[0]}, {year[1]} & {year[2]}"
     if (data_type=='Humidity'):
         measurement="(%)"
+        title=f"Comparing the maximum, mean & minimum humidity values of {year[0]}, {year[1]} & {year[2]}"
     if (data_type=='WindSpeed'):
         measurement="(mph)"
+        title=f"Comparing the maximum, mean & minimum wind speed values of {year[0]}, {year[1]} & {year[2]}"
     if (data_type=='Pressure'):
         measurement="(Hg)"
-    
+        title=f"Comparing the maximum, mean & minimum pressure values of {year[0]}, {year[1]} & {year[2]}"
+    plt.title(title)
     plt.ylabel(data_type + " " + measurement)
+    
+    # Adding vertical lines
+    plt.vlines(x=year, ymin=minValuesYear, ymax=[maxValuesYear], colors='black', ls='-', lw=2)
 
+    # Plotting and adding a legend
     plotMaxValueCom(maxValuesYear, year)
     plotMeanValueCom(meanValuesYear, year)
     plotMinValueCom(minValuesYear, year)
-    
+    plt.legend(bbox_to_anchor=(1.1, 1.05))
     plt.show()
 
 
 
 years = ['2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020']
 
-
-#Create Intro Menu
-start = Tk()
-start.title("Climate and Weather Team 20")
-start.geometry('500x350')
-start.configure(background="grey")
-
-#Creates Headline for Intro
-start1 = ttk.Label(start, text = "Welcome to Weather + Climate", 
-          background = 'grey', foreground ="white", 
-          font = ("Times New Roman", 15))
-start1.place(x = 150, y = 10)
-
-start2 = ttk.Label(start, text = "This system is designed to provide data on the weather and climate in Liverpool." 
-+ "\r\n" + 
-"This was designed and created by:"
-+ "\r\n" +
-"Ryan Hacine-Bacha"
-+ "\r\n" +
-"Bogdan-Florin Andrei"
-+ "\r\n" +
-"Eoin Boyle"
-+ "\r\n" +
-"Lukas Holba"
-+ "\r\n" +
-"Elaine Wong"
-+ "\r\n" +
-"Xiao Long Qi Andrei"
-+ "\r\n" +
-"Once you hit the start button you will be able to pick out our many features. ",
-          background = 'grey', foreground ="Black", 
-          font = ("Times New Roman", 10))
-start2.place(x = 40, y = 35)
-
-#Function for start button
-def main ():
-    mai = Tk()
-    mai.title("Main Menu")
-    mai.geometry('500x320')
-    mai.configure(background="grey")
-    start.destroy()
-    #Label for Main Menu
-    mainlabel = ttk.Label(mai, text = "Main Menu", 
-          background = 'black', foreground ="white", 
-          font = ("Times New Roman", 15))      
-    mainlabel.place(x=200, y=10)
-    #Option 1
-    ml1 = ttk.Label(mai, text = "Temperature", 
-          background = 'black', foreground ="white", 
-          font = ("Times New Roman", 15))      
-    ml1.place(x=200, y=50)
-
-    btn1 = Button(mai,text="Temperature (Degrees F)", width=20, command=op1p2)
-    btn1.place(x=10, y=50)
-    #Option 2
-    ml2 = ttk.Label(mai, text = "Drew Point", 
-          background = 'black', foreground ="white", 
-          font = ("Times New Roman", 15))      
-    ml2.place(x=200, y=100)
-
-    btn2 = Button(mai,text="Drew Point (Degrees F)", width=20, command=op2p2)
-    btn2.place(x=10, y=100)
-    #Option 3
-    ml3 = ttk.Label(mai, text = "Humidity (%)", 
-          background = 'black', foreground ="white", 
-          font = ("Times New Roman", 15))      
-    ml3.place(x=200, y=150)
-
-    btn3 =Button(mai,text="Humidity (%)", width=20, command=op3p2)
-    btn3.place(x=10, y=150)
-    #Option 4
-    ml4 = ttk.Label(mai, text = "Wind Speed (mph)", 
-          background = 'black', foreground ="white", 
-          font = ("Times New Roman", 15))      
-    ml4.place(x=200, y=200)
-    
-    btn4 = Button(mai,text="Wind Speed (mph)", width=20, command=op4p2)
-    btn4.place(x=10, y=200)
-    #Option 5
-    ml5 = ttk.Label(mai, text = "Pressure (Hg)", 
-          background = 'black', foreground ="white", 
-          font = ("Times New Roman", 15))      
-    ml5.place(x=200, y=250)
-    
-    btn5 = Button(mai,text="Pressure (Hg)", width=20, command=op5p2)
-    btn5.place(x=10, y=250)
-    
-    mai.mainloop()
-
-#Adding Function for start Button
-bntStart1 = Button(start,text="Click to start", width=15, command=main)
-bntStart1.place(x=180, y=285)
 
 # Option 1.2 Function
 def op1p2 ():
