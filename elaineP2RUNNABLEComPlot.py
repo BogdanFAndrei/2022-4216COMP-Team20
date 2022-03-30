@@ -13,6 +13,8 @@ from matplotlib.pyplot import figure
 import statistics
 from setuptools import Command
 
+
+
 # Function to get year data
 def getYearData(year, data_type, value_type):
     filename = 'FinallOneCSV.csv'
@@ -58,6 +60,8 @@ def getYearData(year, data_type, value_type):
                         yearData.append(float(row[16]))
     return yearData
 
+
+
 # Finding max temp of a year
 def findMaxValueYear(year_a, data_type):
     maxValueYear=[]
@@ -89,59 +93,44 @@ def findMinValueYear(year_a, data_type):
 
     return minValueYear
 
-
-# Function to plot all the maxValues
-def plotMaxValueCom(maxValues, years):
-    plt.plot(years,maxValues, 'dk',markersize = 10, color='blue',linestyle='',markerfacecolor='blue', label="Maximum")
-
-# Function to plot all the meanValues  
-def plotMeanValueCom(meanValues, years):
-    plt.plot(years,meanValues, 'sk',markersize = 10, color='magenta',linestyle='',markerfacecolor='magenta', label="Mean")
-
-
-# Function to plot all the minValues   
-def plotMinValueCom(minValues, years):
-    plt.plot(years,minValues, 'ok', markersize = 10, color='red',linestyle='',markerfacecolor='red', label="Minimum")
-
-
-# Function to make a single comparison graph. Plots for 1 year.
+# Function to make a single comparison graph. 
 def makeComPlot(year, data_type):
 
+    # Getting max, mean and min values to plot
     maxValuesYear = findMaxValueYear(year, data_type)
     meanValuesYear = findMeanValueYear(year, data_type)
     minValuesYear = findMinValueYear(year, data_type)
     
-    plt.figure(figsize=(12,5))
-    plt.grid(axis= 'y')
-    plt.xlabel('Years')
-    
-    # Setting the title and y axis labels
+    # Gathering better y axis labels that includes the measurements
     if (data_type=='temperature'):
         ylabel="Temperature (° F)"
-        title=f"Comparing the maximum, mean & minimum temperature values of {year[0]}, {year[1]} & {year[2]}"
     if (data_type=='DewPoint'):
-        ylabel="Dew Point(° F)"
-        title=f"Comparing the maximum, mean & minimum dew point values of {year[0]}, {year[1]} & {year[2]}"
+        ylabel="Dew Point (° F)"
     if (data_type=='Humidity'):
         ylabel="Humidity (%)"
-        title=f"Comparing the maximum, mean & minimum humidity values of {year[0]}, {year[1]} & {year[2]}"
     if (data_type=='WindSpeed'):
         ylabel="Wind Speed (mph)"
-        title=f"Comparing the maximum, mean & minimum wind speed values of {year[0]}, {year[1]} & {year[2]}"
     if (data_type=='Pressure'):
-        ylabel="Pressure(Hg)"
-        title=f"Comparing the maximum, mean & minimum pressure values of {year[0]}, {year[1]} & {year[2]}"
-    plt.title(title)
+        ylabel="Pressure (Hg)"
+
+    # Creating a figure and adding a title, y and x labels and a grid
+    plt.figure(figsize=(12,5))
+    plt.title(f"Comparing the maximum, mean & minimum pressure values of {year[0]}, {year[1]} & {year[2]}")
     plt.ylabel(ylabel)
-    
-    # Adding vertical lines
+    plt.xlabel('Years')
+    plt.grid(axis= 'y')
+
+    # Adding vertical lines between the points 
     plt.vlines(x=year, ymin=minValuesYear, ymax=[maxValuesYear], colors='black', ls='-', lw=2)
 
-    # Plotting and adding a legend
-    plotMaxValueCom(maxValuesYear, year)
-    plotMeanValueCom(meanValuesYear, year)
-    plotMinValueCom(minValuesYear, year)
+    # Plotting 
+    plt.plot(year,maxValuesYear, 'dk',markersize = 10, color='blue',linestyle='',markerfacecolor='blue', label="Maximum")
+    plt.plot(year,meanValuesYear, 'sk',markersize = 10, color='magenta',linestyle='',markerfacecolor='magenta', label="Mean")
+    plt.plot(year,minValuesYear, 'ok', markersize = 10, color='red',linestyle='',markerfacecolor='red', label="Minimum")
+
+    # Adding a legend
     plt.legend(bbox_to_anchor=(1.1, 1.05))
+
     plt.show()
 
 
@@ -186,27 +175,34 @@ def main ():
     mai.geometry('500x320')
     mai.configure(background="grey")
     start.destroy()
+
     #Label for Main Menu
     mainlabel = ttk.Label(mai, text = "Main Menu", 
           background = 'black', foreground ="white", 
           font = ("Times New Roman", 15))      
     mainlabel.place(x=200, y=10)
+
+
     #Option 1
-    ml1 = ttk.Label(mai, text = "Temperature", 
+    ml1 = ttk.Label(mai, text = "Temperature (° F)", 
           background = 'black', foreground ="white", 
           font = ("Times New Roman", 15))      
     ml1.place(x=200, y=50)
 
-    btn1 = Button(mai,text="Temperature (Degrees F)", width=20, command=op1p2)
+    btn1 = Button(mai,text="Temperature (° F)", width=20, command=op1p2)
     btn1.place(x=10, y=50)
+
+
     #Option 2
-    ml2 = ttk.Label(mai, text = "Drew Point", 
+    ml2 = ttk.Label(mai, text = "Dew Point (° F)", 
           background = 'black', foreground ="white", 
           font = ("Times New Roman", 15))      
     ml2.place(x=200, y=100)
 
-    btn2 = Button(mai,text="Drew Point (Degrees F)", width=20, command=op2p2)
+    btn2 = Button(mai,text="Dew Point (° F)", width=20, command=op2p2)
     btn2.place(x=10, y=100)
+
+
     #Option 3
     ml3 = ttk.Label(mai, text = "Humidity (%)", 
           background = 'black', foreground ="white", 
@@ -215,6 +211,8 @@ def main ():
 
     btn3 =Button(mai,text="Humidity (%)", width=20, command=op3p2)
     btn3.place(x=10, y=150)
+
+
     #Option 4
     ml4 = ttk.Label(mai, text = "Wind Speed (mph)", 
           background = 'black', foreground ="white", 
@@ -223,21 +221,12 @@ def main ():
     
     btn4 = Button(mai,text="Wind Speed (mph)", width=20, command=op4p2)
     btn4.place(x=10, y=200)
-    #Option 5
-    ml5 = ttk.Label(mai, text = "Pressure (Hg)", 
-          background = 'black', foreground ="white", 
-          font = ("Times New Roman", 15))      
-    ml5.place(x=200, y=250)
-    
-    btn5 = Button(mai,text="Pressure (Hg)", width=20, command=op5p2)
-    btn5.place(x=10, y=250)
     
     mai.mainloop()
 
 #Adding Function for start Button
 bntStart1 = Button(start,text="Click to start", width=15, command=main)
 bntStart1.place(x=180, y=285)
-
 
 
 years = ['2009','2010','2011','2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020']
@@ -423,6 +412,7 @@ def op3p2 ():
     op3p2.mainloop()
 
 
+
 # Option 4.2 Function
 def op4p2 ():
 
@@ -481,63 +471,5 @@ def op4p2 ():
 
     op4p2.mainloop()
 
-
-# Option 5.2 Function
-def op5p2 ():
-
-    # Creating the layout
-    op5p2 = Tk()
-    op5p2.title("Comparing Yearly Pressure (Hg)")
-    op5p2.geometry('500x320')
-    op5p2.configure(background="grey")
-
-    ttk.Label(op5p2, text = "Comparing Yearly Pressure (Hg)", 
-          background = 'black', foreground ="white", 
-          font = ("Times New Roman", 15)).grid(row = 0, column = 1)
-
-    # Year Selection 1 by creating labels, comboboxes & combobox drop down lists
-    ttk.Label(op5p2, text = "Select Year 1 :",
-          font = ("Times New Roman", 10)).grid(column = 0,
-          row = 5, padx = 10, pady = 25)     
-    n = tk.StringVar()
-    yearchoosen1 = ttk.Combobox(op5p2, width = 27, textvariable = n)
-    yearchoosen1['values'] = years
-    yearchoosen1.grid(column = 1, row = 5)
-    yearchoosen1.current()
-
-    # Year Selection 2 by creating labels, comboboxes & combobox drop down lists
-    ttk.Label(op5p2, text = "Select Year 2 :",
-          font = ("Times New Roman", 10)).grid(column = 0,
-          row = 7, padx = 10, pady = 25)  
-    n = tk.StringVar()
-    yearchoosen2 = ttk.Combobox(op5p2, width = 27, textvariable = n)
-    yearchoosen2['values'] = years
-    yearchoosen2.grid(column = 1, row = 7)
-    yearchoosen2.current()
-
-    # Year Selection 3 by creating labels, comboboxes & combobox drop down lists
-    ttk.Label(op5p2, text = "Select Year 3 :",
-          font = ("Times New Roman", 10)).grid(column = 0,
-          row = 9, padx = 10, pady = 25)  
-    n = tk.StringVar()
-    yearchoosen3 = ttk.Combobox(op5p2, width = 27, textvariable = n)
-    yearchoosen3['values'] = years
-    yearchoosen3.grid(column = 1, row = 9)
-    yearchoosen3.current()
-
-    # Submit button function to make ComPlot
-    def clickop5p2():
-        year1= yearchoosen1.get()
-        year2= yearchoosen2.get()
-        year3= yearchoosen3.get()
-        yearSelections = [year1, year2, year3]
-
-        makeComPlot(yearSelections,'Pressure')
-
-    #Adding submit & exit buttons
-    Button(op5p2,text="Submit", width=6, command=clickop5p2) .grid(row=10,column=1,sticky=W)
-    Button(op5p2,text="Quit", width=6, command=op5p2.destroy) .grid(row=10,column=2,sticky=W)
-
-    op5p2.mainloop()
 
 start.mainloop()
