@@ -200,13 +200,6 @@ def main ():
     btn13.place(x=350, y=250)
     #Option 5
     
-  
-
-
-
-    
-
-
 
 #Adding Function for start Button
 bntStart1 = Button(start,text="Click to start", width=15, command=main)
@@ -481,26 +474,7 @@ def op4 ():
    
     op4.mainloop()
 
-def TempComp ():
-    TempComp = Tk()
-    TempComp.title("Drew Point (Degrees F)")
-    TempComp.geometry('500x320')
-    TempComp.configure(background="grey")
-def DewComp ():
-    DewComp = Tk()
-    DewComp.title("Drew Point (Degrees F)")
-    DewComp.geometry('500x320')
-    DewComp.configure(background="grey")
-def HumidityComp ():
-    HumidityComp = Tk()
-    HumidityComp.title("Drew Point (Degrees F)")
-    HumidityComp.geometry('500x320')
-    HumidityComp.configure(background="grey")
-def WindComp ():
-    WindComp = Tk()
-    WindComp.title("Drew Point (Degrees F)")
-    WindComp.geometry('500x320')
-    WindComp.configure(background="grey")
+
 
 # Finding max temp of a year
 def findMaxValueYear(year_a, data_type):
@@ -561,22 +535,22 @@ def makeComPlot(year, data_type):
     
     # Setting the title and y axis labels
     if (data_type=='temperature'):
-        ylabel="Temperature (° F)"
+        measurement="(° F)"
         title=f"Comparing the maximum, mean & minimum temperature values of {year[0]}, {year[1]} & {year[2]}"
     if (data_type=='DewPoint'):
-        ylabel="Dew Point(° F)"
+        measurement="(° F)"
         title=f"Comparing the maximum, mean & minimum dew point values of {year[0]}, {year[1]} & {year[2]}"
     if (data_type=='Humidity'):
-        ylabel="Humidity (%)"
+        measurement="(%)"
         title=f"Comparing the maximum, mean & minimum humidity values of {year[0]}, {year[1]} & {year[2]}"
     if (data_type=='WindSpeed'):
-        ylabel="Wind Speed (mph)"
+        measurement="(mph)"
         title=f"Comparing the maximum, mean & minimum wind speed values of {year[0]}, {year[1]} & {year[2]}"
     if (data_type=='Pressure'):
-        ylabel="Pressure(Hg)"
+        measurement="(Hg)"
         title=f"Comparing the maximum, mean & minimum pressure values of {year[0]}, {year[1]} & {year[2]}"
     plt.title(title)
-    plt.ylabel(ylabel)
+    plt.ylabel(data_type + " " + measurement)
     
     # Adding vertical lines
     plt.vlines(x=year, ymin=minValuesYear, ymax=[maxValuesYear], colors='black', ls='-', lw=2)
@@ -590,7 +564,7 @@ def makeComPlot(year, data_type):
 
 
 
-years = ['2009','2010','2011','2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020']
+years = ['2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020']
 
 
 # Option 1.2 Function
@@ -889,4 +863,337 @@ def op5p2 ():
     Button(op5p2,text="Quit", width=6, command=op5p2.destroy) .grid(row=10,column=2,sticky=W)
 
     op5p2.mainloop()
+#---------------------------------------------------------------------------------------------------------------
+#Option 6
+def TempComp ():
+    TempComp = Tk()
+    TempComp.title("Temperature")
+    TempComp.geometry('500x320')
+    TempComp.configure(background="grey")
+
+    ttk.Label(TempComp, text = "Temperature", 
+          background = 'black', foreground ="white", 
+          font = ("Times New Roman", 15)).grid(row = 0, column = 2)
+    
+# label max/average/min 
+    ttk.Label(TempComp, text = "Select first Year :",
+          font = ("Times New Roman", 10)).grid(column = 0,
+          row = 5, padx = 10, pady = 25)  
+
+    ttk.Label(TempComp, text = "Select second Year :",
+          font = ("Times New Roman", 10)).grid ( padx = 20, pady = 50)        
+
+    
+# Combobox creation
+    n = tk.StringVar()
+    m = tk.StringVar()
+    yearchoosen = ttk.Combobox(TempComp, width = 27, textvariable = n)
+    yearchoosen2 = ttk.Combobox(TempComp, width = 27, textvariable = m)
+
+# Adding combobox drop down list
+    yearchoosen['values'] = ('2013',
+                         '2014',
+                         '2015',
+                          '2016',
+                          '2017',
+                          '2018',
+                          '2019',
+                          '2020')
+    yearchoosen.grid(column = 1, row = 5)
+    yearchoosen.current()
+    
+    yearchoosen2['values'] = ('2013',
+                         '2014',
+                         '2015',
+                          '2016',
+                          '2017',
+                          '2018',
+                          '2019',
+                          '2020')
+    yearchoosen2.grid(column = 1, row = 6)
+    yearchoosen2.current()
+
+# label year
+    ttk.Label(TempComp, text = "Select the value :",
+          font = ("Times New Roman", 10)).grid(column = 0,
+          row = 7, padx = 10, pady = 25)  
+
+# Combobox creation
+    n = tk.StringVar()
+    typevalue = ttk.Combobox(TempComp, width = 27, textvariable = n)
+
+# Adding combobox drop down list
+    typevalue['values'] = ('Minimum', 
+                          'Average',
+                          'Maximum')
+    typevalue.grid(column = 1, row = 7)
+    typevalue.current()
+
+#Submitbutton function
+    def click6():
+        year_a = yearchoosen.get()
+        year_b = yearchoosen2.get()
+        value_type = typevalue.get()
+        data_type='temperature'
+       
+        
+        maketwoPlots(year_a, year_b, data_type, value_type)
+
+#addbutton 
+    Button(TempComp,text="Submit", width=6, command=click6) .grid(row=8,column=1,sticky=W)
+
+#add exit button
+    Button(TempComp,text="Quit", width=6, command=TempComp.destroy) .grid(row=8,column=2,sticky=W)
+    
+    TempComp.mainloop()
+
+#Option7
+def DewComp ():
+    DewComp = Tk()
+    DewComp.title("Drew Point (Degrees F)")
+    DewComp.geometry('500x320')
+    DewComp.configure(background="grey")
+
+    ttk.Label(DewComp, text = "Drew Point(Degrees F)", 
+          background = 'black', foreground ="white", 
+          font = ("Times New Roman", 15)).grid(row = 0, column = 2)
+    
+# label max/average/min 
+    ttk.Label(DewComp, text = "Select first Year :",
+          font = ("Times New Roman", 10)).grid(column = 0,
+          row = 5, padx = 10, pady = 25)  
+
+    ttk.Label(DewComp, text = "Select second Year :",
+          font = ("Times New Roman", 10)).grid ( padx = 20, pady = 50)        
+
+    
+# Combobox creation
+    n = tk.StringVar()
+    m = tk.StringVar()
+    yearchoosen = ttk.Combobox(DewComp, width = 27, textvariable = n)
+    yearchoosen2 = ttk.Combobox(DewComp, width = 27, textvariable = m)
+
+# Adding combobox drop down list
+    yearchoosen['values'] = ('2013',
+                         '2014',
+                         '2015',
+                          '2016',
+                          '2017',
+                          '2018',
+                          '2019',
+                          '2020')
+    yearchoosen.grid(column = 1, row = 5)
+    yearchoosen.current()
+    
+    yearchoosen2['values'] = ('2013',
+                         '2014',
+                         '2015',
+                          '2016',
+                          '2017',
+                          '2018',
+                          '2019',
+                          '2020')
+    yearchoosen2.grid(column = 1, row = 6)
+    yearchoosen2.current()
+
+# label year
+    ttk.Label(DewComp, text = "Select the value :",
+          font = ("Times New Roman", 10)).grid(column = 0,
+          row = 7, padx = 10, pady = 25)  
+
+# Combobox creation
+    n = tk.StringVar()
+    typevalue = ttk.Combobox(DewComp, width = 27, textvariable = n)
+
+# Adding combobox drop down list
+    typevalue['values'] = ('Minimum', 
+                          'Average',
+                          'Maximum')
+    typevalue.grid(column = 1, row = 7)
+    typevalue.current()
+
+#Submitbutton function
+    def click7():
+        year_a = yearchoosen.get()
+        year_b = yearchoosen2.get()
+        value_type = typevalue.get()
+        data_type='DewPoint'
+       
+        
+        maketwoPlots(year_a, year_b, data_type, value_type)
+
+#addbutton 
+    Button(DewComp,text="Submit", width=6, command=click7) .grid(row=8,column=1,sticky=W)
+
+#add exit button
+    Button(DewComp,text="Quit", width=6, command=DewComp.destroy) .grid(row=8,column=2,sticky=W)
+    
+    DewComp.mainloop()
+
+
+#Option8
+def HumidityComp ():
+    HumidityComp = Tk()
+    HumidityComp.title("Humidity (%)")
+    HumidityComp.geometry('500x320')
+    HumidityComp.configure(background="grey")
+ 
+    ttk.Label(HumidityComp, text = "Humidity (%)", 
+          background = 'black', foreground ="white", 
+          font = ("Times New Roman", 15)).grid(row = 0, column = 2)
+    
+# label max/average/min 
+    ttk.Label(HumidityComp, text = "Select first Year :",
+          font = ("Times New Roman", 10)).grid(column = 0,
+          row = 5, padx = 10, pady = 25)  
+
+    ttk.Label(HumidityComp, text = "Select second Year :",
+          font = ("Times New Roman", 10)).grid ( padx = 20, pady = 50)        
+
+    
+# Combobox creation
+    n = tk.StringVar()
+    m = tk.StringVar()
+    yearchoosen = ttk.Combobox(HumidityComp, width = 27, textvariable = n)
+    yearchoosen2 = ttk.Combobox(HumidityComp, width = 27, textvariable = m)
+
+# Adding combobox drop down list
+    yearchoosen['values'] = ('2013',
+                         '2014',
+                         '2015',
+                          '2016',
+                          '2017',
+                          '2018',
+                          '2019',
+                          '2020')
+    yearchoosen.grid(column = 1, row = 5)
+    yearchoosen.current()
+    
+    yearchoosen2['values'] = ('2013',
+                         '2014',
+                         '2015',
+                          '2016',
+                          '2017',
+                          '2018',
+                          '2019',
+                          '2020')
+    yearchoosen2.grid(column = 1, row = 6)
+    yearchoosen2.current()
+
+# label year
+    ttk.Label(HumidityComp, text = "Select the value :",
+          font = ("Times New Roman", 10)).grid(column = 0,
+          row = 7, padx = 10, pady = 25)  
+
+# Combobox creation
+    n = tk.StringVar()
+    typevalue = ttk.Combobox(HumidityComp, width = 27, textvariable = n)
+
+# Adding combobox drop down list
+    typevalue['values'] = ('Minimum', 
+                          'Average',
+                          'Maximum')
+    typevalue.grid(column = 1, row = 7)
+    typevalue.current()
+
+#Submitbutton function
+    def click8():
+        year_a = yearchoosen.get()
+        year_b = yearchoosen2.get()
+        value_type = typevalue.get()
+        data_type='Humidity'
+       
+        
+        maketwoPlots(year_a, year_b, data_type, value_type)
+
+#addbutton 
+    Button(HumidityComp,text="Submit", width=6, command=click8) .grid(row=8,column=1,sticky=W)
+
+#add exit button
+    Button(HumidityComp,text="Quit", width=6, command=HumidityComp.destroy) .grid(row=8,column=2,sticky=W)
+    
+    HumidityComp.mainloop()
+ 
+ #Option9
+def WindComp ():
+    WindComp = Tk()
+    WindComp.title("Wind Speed (mph)")
+    WindComp.geometry('500x320')
+    WindComp.configure(background="grey")
+
+    ttk.Label(WindComp, text = "Wind Speed (mph)", 
+          background = 'black', foreground ="white", 
+          font = ("Times New Roman", 15)).grid(row = 0, column = 2)
+    
+# label max/average/min 
+    ttk.Label(WindComp, text = "Select first Year :",
+          font = ("Times New Roman", 10)).grid(column = 0,
+          row = 5, padx = 10, pady = 25)  
+
+    ttk.Label(WindComp, text = "Select second Year :",
+          font = ("Times New Roman", 10)).grid ( padx = 20, pady = 50)        
+
+    
+# Combobox creation
+    n = tk.StringVar()
+    m = tk.StringVar()
+    yearchoosen = ttk.Combobox(WindComp, width = 27, textvariable = n)
+    yearchoosen2 = ttk.Combobox(WindComp, width = 27, textvariable = m)
+
+# Adding combobox drop down list
+    yearchoosen['values'] = ('2013',
+                         '2014',
+                         '2015',
+                          '2016',
+                          '2017',
+                          '2018',
+                          '2019',
+                          '2020')
+    yearchoosen.grid(column = 1, row = 5)
+    yearchoosen.current()
+    
+    yearchoosen2['values'] = ('2013',
+                         '2014',
+                         '2015',
+                          '2016',
+                          '2017',
+                          '2018',
+                          '2019',
+                          '2020')
+    yearchoosen2.grid(column = 1, row = 6)
+    yearchoosen2.current()
+
+# label year
+    ttk.Label(WindComp, text = "Select the value :",
+          font = ("Times New Roman", 10)).grid(column = 0,
+          row = 7, padx = 10, pady = 25)  
+
+# Combobox creation
+    n = tk.StringVar()
+    typevalue = ttk.Combobox(WindComp, width = 27, textvariable = n)
+
+# Adding combobox drop down list
+    typevalue['values'] = ('Minimum', 
+                          'Average',
+                          'Maximum')
+    typevalue.grid(column = 1, row = 7)
+    typevalue.current()
+
+#Submitbutton function
+    def click9():
+        year_a = yearchoosen.get()
+        year_b = yearchoosen2.get()
+        value_type = typevalue.get()
+        data_type='WindSpeed'
+       
+        
+        maketwoPlots(year_a, year_b, data_type, value_type)
+
+#addbutton 
+    Button(WindComp,text="Submit", width=6, command=click9) .grid(row=8,column=1,sticky=W)
+
+#add exit button
+    Button(WindComp,text="Quit", width=6, command=WindComp.destroy) .grid(row=8,column=2,sticky=W)
+
+    WindComp.mainloop()
 start.mainloop()
