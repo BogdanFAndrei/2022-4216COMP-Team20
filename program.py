@@ -317,7 +317,7 @@ def op2 ():
 
 # Adding combobox drop down list
     typevalue['values'] = ('Minimum',
-                          ' Average',
+                          'Average',
                           'Maximum')
     typevalue.grid(column = 1, row = 7)
     typevalue.current()
