@@ -203,7 +203,7 @@ def main ():
 
 #Adding Function for start Button
 bntStart1 = Button(start,text="Click to start", width=15, command=main)
-bntStart1.place(x=180, y=285)
+bntStart1.place(x=180, y=300)
 
 #Option 1 Function
 def op1 ():
@@ -1196,4 +1196,5 @@ def WindComp ():
     Button(WindComp,text="Quit", width=6, command=WindComp.destroy) .grid(row=8,column=2,sticky=W)
 
     WindComp.mainloop()
+
 start.mainloop()
