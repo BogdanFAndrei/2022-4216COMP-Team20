@@ -209,21 +209,24 @@ bntStart1.place(x=180, y=300)
 def op1 ():
     op1 = Tk()
     op1.title("Temperature (Degrees F)")
-    op1.geometry('500x320')
-    op1.configure(background="grey")
+    op1.geometry('400x240')
+    op1.configure(background="lightgreen")
 
-    ttk.Label(op1, text = "Temperature (Degrees F)",
-          background = 'black', foreground ="white",
-          font = ("Times New Roman", 15)).grid(row = 0, column = 1)
+    lbl = ttk.Label(op1, text = "Temperature (Degrees F)",
+          background = 'lightgreen', foreground ="black",
+          font = ("Times New Roman", 15))
+    lbl.place(x=80, y=18)
 
 # label max/average/min
-    ttk.Label(op1, text = "Select the Year :",
-          font = ("Times New Roman", 10)).grid(column = 0,
-          row = 5, padx = 10, pady = 25)  
+    lbl1 = ttk.Label(op1, text = "Select the Year :",
+          background = 'lightgreen', foreground ="black",
+          font = ("Times New Roman", 10))  
+    lbl1.place(x=10, y=80)
 
 # Combobox creation
     n = tk.StringVar()
     yearchoosen = ttk.Combobox(op1, width = 27, textvariable = n)
+    yearchoosen.place(x=110, y=80)
 
 # Adding combobox drop down list
     yearchoosen['values'] = ('2013',
@@ -234,25 +237,25 @@ def op1 ():
                           '2018',
                           '2019',
                           '2020')
-    yearchoosen.grid(column = 1, row = 5)
+    yearchoosen.place(x=110, y=80)
     yearchoosen.current()
 
-
-
-# label year
-    ttk.Label(op1, text = "Select the value :",
-          font = ("Times New Roman", 10)).grid(column = 0,
-          row = 7, padx = 10, pady = 25)  
+# label value
+    lbl2 = ttk.Label(op1, text = "Select the value :",
+        background = 'lightgreen', foreground ="black",
+          font = ("Times New Roman", 10))
+    lbl2.place(x=10, y=130)
 
 # Combobox creation
     n = tk.StringVar()
     typevalue = ttk.Combobox(op1, width = 27, textvariable = n)
+    typevalue.place(x=110, y=130)
 
 # Adding combobox drop down list
     typevalue['values'] = ('Minimum',
                           'Average',
                           'Maximum')
-    typevalue.grid(column = 1, row = 7)
+    typevalue.place(x=110, y=130)
     typevalue.current()
 
 #Submitbutton function +++++ Function for finding data
@@ -261,14 +264,15 @@ def op1 ():
         value_type = typevalue.get()
         data_type='temperature'
        
-       
         makePlot(year_a,data_type,value_type)
 
 #addbutton
-    Button(op1,text="Submit", width=6, command=click) .grid(row=8,column=1,sticky=W)
+    btn = Button(op1,text="Submit", width=6, command=click)
+    btn.place(x=120, y=180)
 
 #add exit button
-    Button(op1,text="Quit", width=6, command=op1.destroy) .grid(row=8,column=2,sticky=W)
+    btn1 = Button(op1,text="Quit", width=6, command=op1.destroy) 
+    btn1.place(x=220, y=180)
 
     op1.mainloop()
 
