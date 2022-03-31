@@ -57,7 +57,6 @@ def makePlot( year_a, data_type, value_type):
 
     year_a_data = getYearData(year_a, data_type, value_type)
     
-
     month_labels =['January','February','March','April' ,'May','June','July','August','September','October','November','December']
     plt.figure(figsize=(12,5))
 
@@ -87,139 +86,156 @@ def maketwoPlots( year_a, year_b, data_type, value_type):
 #Create Intro Menu
 start = Tk()
 start.title("Climate and Weather Team 20")
-start.geometry('500x350')
-start.configure(background="grey")
+start.configure(background="aqua")
+
+#App placement
+app_width = 500
+app_height = 350
+
+screen_width = start.winfo_screenwidth()
+screen_height = start.winfo_screenheight()
+
+x = (screen_width / 2) - (app_width / 2)
+y = (screen_height / 2) - (app_height / 2)
+
+start.geometry(f'{app_width}x{app_height}+{int(x)}+{int(y)}')
 
 #Creates Headline for Intro
-start1 = ttk.Label(start, text = "Welcome to Weather + Climate",
-          background = 'grey', foreground ="white",
+start1 = ttk.Label(start, text = "\u0332".join("Liverpool's Weather and Climate"),
+          background = 'aqua', foreground ="black",
           font = ("Times New Roman", 15))
-start1.place(x = 150, y = 10)
+start1.place(x = 135, y = 10)
 
 start2 = ttk.Label(start, text = "This system is designed to provide data on the weather and climate in Liverpool." 
 + "\r\n" +
 "This was designed and created by:"
 + "\r\n" +
-"Ryan Hacine-Bacha"
+"- Ryan Hacine-Bacha"
 + "\r\n" +
-"Bogdan-Florin Andrei"
+"- Bogdan-Florin Andrei"
 + "\r\n" +
-"Eoin Boyle"
+"- Eoin Boyle"
 + "\r\n" +
-"Lukas Holba"
+"- Elaine Wong"
 + "\r\n" +
-"Elaine Wong"
+"- Xiao Long Qi Andrei"
 + "\r\n" +
-"Xiao Long Qi Andrei"
-+ "\r\n" +
-"Once you hit the start button you will be able to pick out our many features. ",
-          background = 'grey', foreground ="Black",
+"Once you hit the start button you will be able to select one of our many features. ",
+          background = 'aqua', foreground ="Black",
           font = ("Times New Roman", 10))
-start2.place(x = 40, y = 35)
+start2.place(x = 40, y = 50)
 
 #Function for start button
 def main ():
     mai = Tk()
     mai.title("Main Menu")
-    mai.geometry('500x320')
-    mai.configure(background="grey")
+    mai.geometry('570x320')
+    mai.configure(background="light green")
     start.destroy()
+
+    #App placement
+    app_width = 570
+    app_height = 320
+
+    screen_width = mai.winfo_screenwidth()
+    screen_height = mai.winfo_screenheight()
+
+    x = (screen_width / 2) - (app_width / 2)
+    y = (screen_height / 2) - (app_height / 2)
+
+    mai.geometry(f'{app_width}x{app_height}+{int(x)}+{int(y)}')
    
     #Label for Main Menu
-    mainlabel = ttk.Label(mai, text = "Main Menu",
-          background = 'black', foreground ="white",
+    mainlabel = ttk.Label(mai, text = "\u0332".join("Main Menu"),
+          background = 'lightgreen', foreground ="Black",
           font = ("Times New Roman", 15))      
-    mainlabel.place(x=200, y=10)
+    mainlabel.place(x=240, y=10)
 
-    #Option 1
-    
+    #YEAR ONE options
+    ml5 = ttk.Label(mai, text = "One Year",
+          background = 'light green', foreground ="black",
+          font = ("Times New Roman", 15))      
+    ml5.place(x=50, y=50)
 
     btn1 = Button(mai,text="Temperature (Degrees F)", width=20, command=op1)
     btn1.place(x=10, y=100)
    
-    #Option 2
-  
-
     btn2 = Button(mai,text="Drew Point (Degrees F)", width=20, command=op2)
     btn2.place(x=10, y=150)
 
-    #Option 3
-  
-    btn3 =Button(mai,text="Humidity (%)", width=20, command=op3)
+    btn3 = Button(mai,text="Humidity (%)", width=20, command=op3)
     btn3.place(x=10, y=200)
-
-    #Option 4
     
-
-    ml5 = ttk.Label(mai, text = "One Year",
-          background = 'black', foreground ="white",
-          font = ("Times New Roman", 15))      
-    ml5.place(x=50, y=50)
-   
-    ml5 = ttk.Label(mai, text = "Two Years",
-          background = 'black', foreground ="white",
-          font = ("Times New Roman", 15))      
-    ml5.place(x=200, y=50)
-
-    
-    ml5 = ttk.Label(mai, text = "Three years",
-          background = 'black', foreground ="white",
-          font = ("Times New Roman", 15))      
-    ml5.place(x=380, y=50)
-
     btn4 = Button(mai,text="Wind Speed (mph)", width=20, command=op4)
     btn4.place(x=10, y=250)
+   
+   #YEAR TWO options
+    ml5 = ttk.Label(mai, text = "Two Years",
+          background = 'light green', foreground ="black",
+          font = ("Times New Roman", 15))      
+    ml5.place(x=240, y=50)
 
-    btn6 = Button(mai,text="Temperature", width=20, command=TempComp)
-    btn6.place(x=180, y=100)
+    btn6 = Button(mai,text="Temperature (Degrees F)", width=20, command=TempComp)
+    btn6.place(x=205, y=100)
 
-    btn7 = Button(mai,text="Dew Point", width=20, command=DewComp)
-    btn7.place(x=180, y=150)
+    btn7 = Button(mai,text="Dew Point (Degrees F)", width=20, command=DewComp)
+    btn7.place(x=205, y=150)
 
     btn8 = Button(mai,text="Humidity (%)", width=20, command=HumidityComp)
-    btn8.place(x=180, y=200)
+    btn8.place(x=205, y=200)
 
-    btn9 = Button(mai,text="Wind Speed", width=20, command=WindComp)
-    btn9.place(x=180, y=250)
+    btn9 = Button(mai,text="Wind Speed (mph)", width=20, command=WindComp)
+    btn9.place(x=205, y=250)
+
+    #YEAR THREE options
+    ml5 = ttk.Label(mai, text = "Three years",
+          background = 'light green', foreground ="black",
+          font = ("Times New Roman", 15))      
+    ml5.place(x=430, y=50)
 
     btn10 = Button(mai,text="Temperature (Degrees F)", width=20, command=op1p2)
-    btn10.place(x=350, y=100)
+    btn10.place(x=400, y=100)
     
-    #Option 2
-
     btn11 = Button(mai,text="Drew Point (Degrees F)", width=20, command=op2p2)
-    btn11.place(x=350, y=150)
-    #Option 3
-
-
+    btn11.place(x=400, y=150)
+    
     btn12 =Button(mai,text="Humidity (%)", width=20, command=op3p2)
-    btn12.place(x=350, y=200)
-    #Option 4
-    
+    btn12.place(x=400, y=200)
+   
     btn13 = Button(mai,text="Wind Speed (mph)", width=20, command=op4p2)
-    btn13.place(x=350, y=250)
-    #Option 5
-    
+    btn13.place(x=400, y=250)
 
 #Adding Function for start Button
-bntStart1 = Button(start,text="Click to start", width=15, command=main)
+bntStart1 = Button(start,text="Click to start", width=15, command=main, background = 'lightgreen', foreground ="Black")
 bntStart1.place(x=180, y=300)
+
 
 #Option 1 Function
 def op1 ():
     op1 = Tk()
     op1.title("Temperature (Degrees F)")
-    op1.geometry('400x240')
-    op1.configure(background="lightgreen")
+    op1.configure(background="darkorange")
+
+    #App placement
+    app_width = 400
+    app_height = 240
+
+    screen_width = op1.winfo_screenwidth()
+    screen_height = op1.winfo_screenheight()
+
+    x = (screen_width / 2) - (app_width / 2)
+    y = (screen_height / 2) - (app_height / 2)
+
+    op1.geometry(f'{app_width}x{app_height}+{int(x)}+{int(y)}')
 
     lbl = ttk.Label(op1, text = "Temperature (Degrees F)",
-          background = 'lightgreen', foreground ="black",
+          background = 'darkorange', foreground ="black",
           font = ("Times New Roman", 15))
     lbl.place(x=80, y=18)
 
 # label max/average/min
     lbl1 = ttk.Label(op1, text = "Select the Year :",
-          background = 'lightgreen', foreground ="black",
+          background = 'darkorange', foreground ="black",
           font = ("Times New Roman", 10))  
     lbl1.place(x=10, y=80)
 
@@ -229,7 +245,11 @@ def op1 ():
     yearchoosen.place(x=110, y=80)
 
 # Adding combobox drop down list
-    yearchoosen['values'] = ('2013',
+    yearchoosen['values'] = ('2009',
+                        '2010',
+                        '2011',
+                        '2012',
+                        '2013',
                          '2014',
                          '2015',
                           '2016',
@@ -242,7 +262,7 @@ def op1 ():
 
 # label value
     lbl2 = ttk.Label(op1, text = "Select the value :",
-        background = 'lightgreen', foreground ="black",
+        background = 'darkorange', foreground ="black",
           font = ("Times New Roman", 10))
     lbl2.place(x=10, y=130)
 
@@ -279,25 +299,43 @@ def op1 ():
     #Option 2 Function
 def op2 ():
     op2 = Tk()
-    op2.title("Drew Point (Degrees F)")
-    op2.geometry('500x320')
-    op2.configure(background="grey")
+    op2.title("Dew Point (Degrees F)")
+    op2.configure(background="darkorange")
 
-    ttk.Label(op2, text = "Drew Point (Degrees F)",
-          background = 'black', foreground ="white",
-          font = ("Times New Roman", 15)).grid(row = 0, column = 2)
+    #App placement
+    app_width = 400
+    app_height = 240
+
+    screen_width = op2.winfo_screenwidth()
+    screen_height = op2.winfo_screenheight()
+
+    x = (screen_width / 2) - (app_width / 2)
+    y = (screen_height / 2) - (app_height / 2)
+
+    op2.geometry(f'{app_width}x{app_height}+{int(x)}+{int(y)}')
+
+    lbl = ttk.Label(op2, text = "Dew Point (Degrees F)",
+          background = 'darkorange', foreground ="black",
+          font = ("Times New Roman", 15))
+    lbl.place(x=80, y=18)
 
 # label max/average/min
-    ttk.Label(op2, text = "Select the Year :",
-          font = ("Times New Roman", 10)).grid(column = 0,
-          row = 5, padx = 10, pady = 25)  
+    lbl1 = ttk.Label(op2, text = "Select the Year :",
+          background = 'darkorange', foreground ="black",
+          font = ("Times New Roman", 10))  
+    lbl1.place(x=10, y=80)
 
 # Combobox creation
     n = tk.StringVar()
     yearchoosen = ttk.Combobox(op2, width = 27, textvariable = n)
+    yearchoosen.place(x=110, y=80)
 
 # Adding combobox drop down list
-    yearchoosen['values'] = ('2013',
+    yearchoosen['values'] = ('2009',
+                        '2010',
+                        '2011',
+                        '2012',
+                        '2013',
                          '2014',
                          '2015',
                           '2016',
@@ -305,67 +343,85 @@ def op2 ():
                           '2018',
                           '2019',
                           '2020')
-    yearchoosen.grid(column = 1, row = 5)
+    yearchoosen.place(x=110, y=80)
     yearchoosen.current()
 
-
-
-# label year
-    ttk.Label(op2, text = "Select the value :",
-          font = ("Times New Roman", 10)).grid(column = 0,
-          row = 7, padx = 10, pady = 25)  
+# label value
+    lbl2 = ttk.Label(op2, text = "Select the value :",
+        background = 'darkorange', foreground ="black",
+          font = ("Times New Roman", 10))
+    lbl2.place(x=10, y=130)
 
 # Combobox creation
     n = tk.StringVar()
     typevalue = ttk.Combobox(op2, width = 27, textvariable = n)
+    typevalue.place(x=110, y=130)
 
 # Adding combobox drop down list
     typevalue['values'] = ('Minimum',
                           'Average',
                           'Maximum')
-    typevalue.grid(column = 1, row = 7)
+    typevalue.place(x=110, y=130)
     typevalue.current()
 
-#Submitbutton function
-    def click2():
+#Submitbutton function +++++ Function for finding data
+    def click():
         year_a = yearchoosen.get()
         value_type = typevalue.get()
         data_type='DewPoint'
        
-       
         makePlot(year_a,data_type,value_type)
 
 #addbutton
-    Button(op2,text="Submit", width=6, command=click2) .grid(row=8,column=1,sticky=W)
+    btn = Button(op2,text="Submit", width=6, command=click)
+    btn.place(x=120, y=180)
 
 #add exit button
-    Button(op2,text="Quit", width=6, command=op2.destroy) .grid(row=8,column=2,sticky=W)
-   
+    btn1 = Button(op2,text="Quit", width=6, command=op2.destroy) 
+    btn1.place(x=220, y=180)
+
     op2.mainloop()
 
 #Option 3 Function
 def op3 ():
     op3 = Tk()
     op3.title("Humidity (%)")
-    op3.geometry('500x320')
-    op3.configure(background="grey")
-   
+    op3.configure(background="darkorange")
 
-    ttk.Label(op3, text = "Humidity (%)",
-          background = 'black', foreground ="white",
-          font = ("Times New Roman", 15)).grid(row = 0, column = 3)
+    #App placement
+    app_width = 400
+    app_height = 240
+
+    screen_width = op3.winfo_screenwidth()
+    screen_height = op3.winfo_screenheight()
+
+    x = (screen_width / 2) - (app_width / 2)
+    y = (screen_height / 2) - (app_height / 2)
+
+    op3.geometry(f'{app_width}x{app_height}+{int(x)}+{int(y)}')
+
+    lbl = ttk.Label(op3, text = "Humidity (%)",
+          background = 'darkorange', foreground ="black",
+          font = ("Times New Roman", 15))
+    lbl.place(x=80, y=18)
 
 # label max/average/min
-    ttk.Label(op3, text = "Select the Year :",
-          font = ("Times New Roman", 10)).grid(column = 0,
-          row = 5, padx = 10, pady = 25)  
+    lbl1 = ttk.Label(op3, text = "Select the Year :",
+          background = 'darkorange', foreground ="black",
+          font = ("Times New Roman", 10))  
+    lbl1.place(x=10, y=80)
 
 # Combobox creation
     n = tk.StringVar()
     yearchoosen = ttk.Combobox(op3, width = 27, textvariable = n)
+    yearchoosen.place(x=110, y=80)
 
 # Adding combobox drop down list
-    yearchoosen['values'] = ('2013',
+    yearchoosen['values'] = ('2009',
+                        '2010',
+                        '2011',
+                        '2012',
+                        '2013',
                          '2014',
                          '2015',
                           '2016',
@@ -373,66 +429,86 @@ def op3 ():
                           '2018',
                           '2019',
                           '2020')
-    yearchoosen.grid(column = 1, row = 5)
+    yearchoosen.place(x=110, y=80)
     yearchoosen.current()
 
-
-
-# label year
-    ttk.Label(op3, text = "Select the value :",
-          font = ("Times New Roman", 10)).grid(column = 0,
-          row = 7, padx = 10, pady = 25)  
+# label value
+    lbl2 = ttk.Label(op3, text = "Select the value :",
+        background = 'darkorange', foreground ="black",
+          font = ("Times New Roman", 10))
+    lbl2.place(x=10, y=130)
 
 # Combobox creation
     n = tk.StringVar()
     typevalue = ttk.Combobox(op3, width = 27, textvariable = n)
+    typevalue.place(x=110, y=130)
 
 # Adding combobox drop down list
     typevalue['values'] = ('Minimum',
                           'Average',
                           'Maximum')
-    typevalue.grid(column = 1, row = 7)
+    typevalue.place(x=110, y=130)
     typevalue.current()
 
-#Submitbutton function
-    def click3():
+#Submitbutton function +++++ Function for finding data
+    def click():
         year_a = yearchoosen.get()
         value_type = typevalue.get()
         data_type='Humidity'
        
-       
         makePlot(year_a,data_type,value_type)
 
 #addbutton
-    Button(op3,text="Submit", width=6, command=click3) .grid(row=8,column=1,sticky=W)
+    btn = Button(op3,text="Submit", width=6, command=click)
+    btn.place(x=120, y=180)
 
 #add exit button
-    Button(op3,text="Quit", width=6, command=op3.destroy) .grid(row=8,column=2,sticky=W)
-   
+    btn1 = Button(op3,text="Quit", width=6, command=op3.destroy) 
+    btn1.place(x=220, y=180)
+
     op3.mainloop()
 
     #Option 4 Function
+#Option 3 Function
 def op4 ():
     op4 = Tk()
     op4.title("Wind Speed (mph)")
-    op4.geometry('500x320')
-    op4.configure(background="grey")
+    op4.configure(background="darkorange")
 
-    ttk.Label(op4, text = "Wind Speed (mph)",
-          background = 'black', foreground ="white",
-          font = ("Times New Roman", 15)).grid(row = 0, column = 4)
+    #App placement
+    app_width = 400
+    app_height = 240
+
+    screen_width = op4.winfo_screenwidth()
+    screen_height = op4.winfo_screenheight()
+
+    x = (screen_width / 2) - (app_width / 2)
+    y = (screen_height / 2) - (app_height / 2)
+
+    op4.geometry(f'{app_width}x{app_height}+{int(x)}+{int(y)}')
+
+    lbl = ttk.Label(op4, text = "Wind Speed (mph)",
+          background = 'darkorange', foreground ="black",
+          font = ("Times New Roman", 15))
+    lbl.place(x=80, y=18)
 
 # label max/average/min
-    ttk.Label(op4, text = "Select the Year :",
-          font = ("Times New Roman", 10)).grid(column = 0,
-          row = 5, padx = 10, pady = 25)  
+    lbl1 = ttk.Label(op4, text = "Select the Year :",
+          background = 'darkorange', foreground ="black",
+          font = ("Times New Roman", 10))  
+    lbl1.place(x=10, y=80)
 
 # Combobox creation
     n = tk.StringVar()
     yearchoosen = ttk.Combobox(op4, width = 27, textvariable = n)
+    yearchoosen.place(x=110, y=80)
 
 # Adding combobox drop down list
-    yearchoosen['values'] = ('2013',
+    yearchoosen['values'] = ('2009',
+                        '2010',
+                        '2011',
+                        '2012',
+                        '2013',
                          '2014',
                          '2015',
                           '2016',
@@ -440,45 +516,44 @@ def op4 ():
                           '2018',
                           '2019',
                           '2020')
-    yearchoosen.grid(column = 1, row = 5)
+    yearchoosen.place(x=110, y=80)
     yearchoosen.current()
 
-
-
-# label year
-    ttk.Label(op4, text = "Select the value :",
-          font = ("Times New Roman", 10)).grid(column = 0,
-          row = 7, padx = 10, pady = 25)  
+# label value
+    lbl2 = ttk.Label(op4, text = "Select the value :",
+        background = 'darkorange', foreground ="black",
+          font = ("Times New Roman", 10))
+    lbl2.place(x=10, y=130)
 
 # Combobox creation
     n = tk.StringVar()
     typevalue = ttk.Combobox(op4, width = 27, textvariable = n)
+    typevalue.place(x=110, y=130)
 
 # Adding combobox drop down list
     typevalue['values'] = ('Minimum',
                           'Average',
                           'Maximum')
-    typevalue.grid(column = 1, row = 7)
+    typevalue.place(x=110, y=130)
     typevalue.current()
 
-#Submitbutton function
-    def click4():
+#Submitbutton function +++++ Function for finding data
+    def click():
         year_a = yearchoosen.get()
         value_type = typevalue.get()
         data_type='WindSpeed'
        
-       
         makePlot(year_a,data_type,value_type)
 
 #addbutton
-    Button(op4,text="Submit", width=6, command=click4) .grid(row=8,column=1,sticky=W)
+    btn = Button(op4,text="Submit", width=6, command=click)
+    btn.place(x=120, y=180)
 
 #add exit button
-    Button(op4,text="Quit", width=6, command=op4.destroy) .grid(row=8,column=2,sticky=W)
-   
+    btn1 = Button(op4,text="Quit", width=6, command=op4.destroy) 
+    btn1.place(x=220, y=180)
+
     op4.mainloop()
-
-
 
 # Finding max temp of a year
 def findMaxValueYear(year_a, data_type):
@@ -500,7 +575,6 @@ def findMeanValueYear(year_a, data_type):
 
     return meanValueYear
 
-
 # Finding min temp of a year
 def findMinValueYear(year_a, data_type):
     minValueYear=[]
@@ -510,7 +584,6 @@ def findMinValueYear(year_a, data_type):
         minValueYear.append(min(year_a_data))
 
     return minValueYear
-
 
 # Function to plot all the maxValues
 def plotMaxValueCom(maxValues, years):
@@ -566,10 +639,7 @@ def makeComPlot(year, data_type):
     plt.legend(bbox_to_anchor=(1.1, 1.05))
     plt.show()
 
-
-
-years = ['2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020']
-
+years = ['2009','2010','2011','2012','2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020']
 
 # Option 1.2 Function
 def op1p2 ():
@@ -577,42 +647,60 @@ def op1p2 ():
     # Creating the layout
     op1p2 = Tk()
     op1p2.title("Comparing Yearly Temperature (° F)")
-    op1p2.geometry('500x320')
-    op1p2.configure(background="grey")
+    op1p2.configure(background="yellow")
 
-    ttk.Label(op1p2, text = "Comparing Yearly Temperature (° F)", 
-          background = 'black', foreground ="white", 
-          font = ("Times New Roman", 15)).grid(row = 0, column = 1)
+    #App placement
+    app_width = 500
+    app_height = 320
+
+    screen_width = op1p2.winfo_screenwidth()
+    screen_height = op1p2.winfo_screenheight()
+
+    x = (screen_width / 2) - (app_width / 2)
+    y = (screen_height / 2) - (app_height / 2)
+
+    op1p2.geometry(f'{app_width}x{app_height}+{int(x)}+{int(y)}')
+
+    lbl0 = ttk.Label(op1p2, text = "Comparing Yearly Temperature (° F)", 
+          background = 'yellow', foreground ="black", 
+          font = ("Times New Roman", 15))
+    lbl0.place(x=100, y=20)
 
     # Year Selection 1 by creating labels, comboboxes & combobox drop down lists
-    ttk.Label(op1p2, text = "Select Year 1 :",
-          font = ("Times New Roman", 10)).grid(column = 0,
-          row = 5, padx = 10, pady = 25)     
+    lbl1 = ttk.Label(op1p2, text = "Select Year 1 :",
+          background = 'yellow', foreground ="black", 
+          font = ("Times New Roman", 10))
+    lbl1.place(x=80, y=100)
+          
     n = tk.StringVar()
     yearchoosen1 = ttk.Combobox(op1p2, width = 27, textvariable = n)
     yearchoosen1['values'] = years
-    yearchoosen1.grid(column = 1, row = 5)
     yearchoosen1.current()
+    yearchoosen1.place(x=180, y=100)
 
     # Year Selection 2 by creating labels, comboboxes & combobox drop down lists
-    ttk.Label(op1p2, text = "Select Year 2 :",
-          font = ("Times New Roman", 10)).grid(column = 0,
-          row = 7, padx = 10, pady = 25)  
+    lbl2 = ttk.Label(op1p2, text = "Select Year 2 :",
+        background = 'yellow', foreground ="black", 
+          font = ("Times New Roman", 10))
+    lbl2.place(x=80, y=155)
+
     n = tk.StringVar()
     yearchoosen2 = ttk.Combobox(op1p2, width = 27, textvariable = n)
     yearchoosen2['values'] = years
-    yearchoosen2.grid(column = 1, row = 7)
     yearchoosen2.current()
+    yearchoosen2.place(x=180, y=155)
 
     # Year Selection 3 by creating labels, comboboxes & combobox drop down lists
-    ttk.Label(op1p2, text = "Select Year 3 :",
-          font = ("Times New Roman", 10)).grid(column = 0,
-          row = 9, padx = 10, pady = 25)  
+    lbl3 = ttk.Label(op1p2, text = "Select Year 3 :",
+          background = 'yellow', foreground ="black",
+          font = ("Times New Roman", 10))       
+    lbl3.place(x=80, y=210)
+
     n = tk.StringVar()
     yearchoosen3 = ttk.Combobox(op1p2, width = 27, textvariable = n)
     yearchoosen3['values'] = years
-    yearchoosen3.grid(column = 1, row = 9)
     yearchoosen3.current()
+    yearchoosen3.place(x=180, y=210)
 
     # Submit button function to make ComPlot
     def clickop1p2():
@@ -624,13 +712,13 @@ def op1p2 ():
         makeComPlot(yearSelections,'temperature')
 
     #Adding submit & exit buttons
-    Button(op1p2,text="Submit", width=6, command=clickop1p2) .grid(row=10,column=1,sticky=W)
-    Button(op1p2,text="Quit", width=6, command=op1p2.destroy) .grid(row=10,column=2,sticky=W)
+    btn = Button(op1p2,text="Submit", width=6, command=clickop1p2)
+    btn.place(x=185, y=260)
+
+    btn1 = Button(op1p2,text="Quit", width=6, command=op1p2.destroy)
+    btn1.place(x=285, y=260)
 
     op1p2.mainloop()
-
-
-
 
 # Option 2.2 function
 def op2p2 ():
@@ -638,42 +726,60 @@ def op2p2 ():
     # Creating the layout
     op2p2 = Tk()
     op2p2.title("Comparing Yearly Dew Point (° F)")
-    op2p2.geometry('500x320')
-    op2p2.configure(background="grey")
+    op2p2.configure(background="yellow")
 
-    ttk.Label(op2p2, text = "Comparing Yearly Dew Point (° F)", 
-          background = 'black', foreground ="white", 
-          font = ("Times New Roman", 15)).grid(row = 0, column = 1)
+    #App placement
+    app_width = 500
+    app_height = 320
+
+    screen_width = op2p2.winfo_screenwidth()
+    screen_height = op2p2.winfo_screenheight()
+
+    x = (screen_width / 2) - (app_width / 2)
+    y = (screen_height / 2) - (app_height / 2)
+
+    op2p2.geometry(f'{app_width}x{app_height}+{int(x)}+{int(y)}')
+
+    lbl0 = ttk.Label(op2p2, text = "Comparing Yearly Dew Point (° F)", 
+          background = 'yellow', foreground ="black", 
+          font = ("Times New Roman", 15))
+    lbl0.place(x=100, y=20)
 
     # Year Selection 1 by creating labels, comboboxes & combobox drop down lists
-    ttk.Label(op2p2, text = "Select Year 1 :",
-          font = ("Times New Roman", 10)).grid(column = 0,
-          row = 5, padx = 10, pady = 25)     
+    lbl1 = ttk.Label(op2p2, text = "Select Year 1 :",
+          background = 'yellow', foreground ="black", 
+          font = ("Times New Roman", 10))
+    lbl1.place(x=80, y=100)
+          
     n = tk.StringVar()
     yearchoosen1 = ttk.Combobox(op2p2, width = 27, textvariable = n)
     yearchoosen1['values'] = years
-    yearchoosen1.grid(column = 1, row = 5)
     yearchoosen1.current()
+    yearchoosen1.place(x=180, y=100)
 
     # Year Selection 2 by creating labels, comboboxes & combobox drop down lists
-    ttk.Label(op2p2, text = "Select Year 2 :",
-          font = ("Times New Roman", 10)).grid(column = 0,
-          row = 7, padx = 10, pady = 25)  
+    lbl2 = ttk.Label(op2p2, text = "Select Year 2 :",
+        background = 'yellow', foreground ="black", 
+          font = ("Times New Roman", 10))
+    lbl2.place(x=80, y=155)
+
     n = tk.StringVar()
     yearchoosen2 = ttk.Combobox(op2p2, width = 27, textvariable = n)
     yearchoosen2['values'] = years
-    yearchoosen2.grid(column = 1, row = 7)
     yearchoosen2.current()
+    yearchoosen2.place(x=180, y=155)
 
     # Year Selection 3 by creating labels, comboboxes & combobox drop down lists
-    ttk.Label(op2p2, text = "Select Year 3 :",
-          font = ("Times New Roman", 10)).grid(column = 0,
-          row = 9, padx = 10, pady = 25)  
+    lbl3 = ttk.Label(op2p2, text = "Select Year 3 :",
+          background = 'yellow', foreground ="black",
+          font = ("Times New Roman", 10))       
+    lbl3.place(x=80, y=210)
+
     n = tk.StringVar()
     yearchoosen3 = ttk.Combobox(op2p2, width = 27, textvariable = n)
     yearchoosen3['values'] = years
-    yearchoosen3.grid(column = 1, row = 9)
     yearchoosen3.current()
+    yearchoosen3.place(x=180, y=210)
 
     # Submit button function to make ComPlot
     def clickop2p2():
@@ -685,12 +791,13 @@ def op2p2 ():
         makeComPlot(yearSelections,'DewPoint')
 
     #Adding submit & exit buttons
-    Button(op2p2,text="Submit", width=6, command=clickop2p2) .grid(row=10,column=1,sticky=W)
-    Button(op2p2,text="Quit", width=6, command=op2p2.destroy) .grid(row=10,column=2,sticky=W)
+    btn = Button(op2p2,text="Submit", width=6, command=clickop2p2)
+    btn.place(x=185, y=260)
+
+    btn1 = Button(op2p2,text="Quit", width=6, command=op2p2.destroy)
+    btn1.place(x=285, y=260)
 
     op2p2.mainloop()
-
-
 
 # Option 3.2 Function
 def op3p2 ():
@@ -698,42 +805,60 @@ def op3p2 ():
     # Creating the layout
     op3p2 = Tk()
     op3p2.title("Comparing Yearly Humidity (%)")
-    op3p2.geometry('500x320')
-    op3p2.configure(background="grey")
+    op3p2.configure(background="yellow")
 
-    ttk.Label(op3p2, text = "Comparing Yearly Humidity (%)", 
-          background = 'black', foreground ="white", 
-          font = ("Times New Roman", 15)).grid(row = 0, column = 1)
+    #App placement
+    app_width = 500
+    app_height = 320
+
+    screen_width = op3p2.winfo_screenwidth()
+    screen_height = op3p2.winfo_screenheight()
+
+    x = (screen_width / 2) - (app_width / 2)
+    y = (screen_height / 2) - (app_height / 2)
+
+    op3p2.geometry(f'{app_width}x{app_height}+{int(x)}+{int(y)}')
+
+    lbl0 = ttk.Label(op3p2, text = "Comparing Yearly Humidity (%)", 
+          background = 'yellow', foreground ="black", 
+          font = ("Times New Roman", 15))
+    lbl0.place(x=100, y=20)
 
     # Year Selection 1 by creating labels, comboboxes & combobox drop down lists
-    ttk.Label(op3p2, text = "Select Year 1 :",
-          font = ("Times New Roman", 10)).grid(column = 0,
-          row = 5, padx = 10, pady = 25)     
+    lbl1 = ttk.Label(op3p2, text = "Select Year 1 :",
+          background = 'yellow', foreground ="black", 
+          font = ("Times New Roman", 10))
+    lbl1.place(x=80, y=100)
+          
     n = tk.StringVar()
     yearchoosen1 = ttk.Combobox(op3p2, width = 27, textvariable = n)
     yearchoosen1['values'] = years
-    yearchoosen1.grid(column = 1, row = 5)
     yearchoosen1.current()
+    yearchoosen1.place(x=180, y=100)
 
     # Year Selection 2 by creating labels, comboboxes & combobox drop down lists
-    ttk.Label(op3p2, text = "Select Year 2 :",
-          font = ("Times New Roman", 10)).grid(column = 0,
-          row = 7, padx = 10, pady = 25)  
+    lbl2 = ttk.Label(op3p2, text = "Select Year 2 :",
+        background = 'yellow', foreground ="black", 
+          font = ("Times New Roman", 10))
+    lbl2.place(x=80, y=155)
+
     n = tk.StringVar()
     yearchoosen2 = ttk.Combobox(op3p2, width = 27, textvariable = n)
     yearchoosen2['values'] = years
-    yearchoosen2.grid(column = 1, row = 7)
     yearchoosen2.current()
+    yearchoosen2.place(x=180, y=155)
 
     # Year Selection 3 by creating labels, comboboxes & combobox drop down lists
-    ttk.Label(op3p2, text = "Select Year 3 :",
-          font = ("Times New Roman", 10)).grid(column = 0,
-          row = 9, padx = 10, pady = 25)  
+    lbl3 = ttk.Label(op3p2, text = "Select Year 3 :",
+          background = 'yellow', foreground ="black",
+          font = ("Times New Roman", 10))       
+    lbl3.place(x=80, y=210)
+
     n = tk.StringVar()
     yearchoosen3 = ttk.Combobox(op3p2, width = 27, textvariable = n)
     yearchoosen3['values'] = years
-    yearchoosen3.grid(column = 1, row = 9)
     yearchoosen3.current()
+    yearchoosen3.place(x=180, y=210)
 
     # Submit button function to make ComPlot
     def clickop3p2():
@@ -745,11 +870,13 @@ def op3p2 ():
         makeComPlot(yearSelections,'Humidity')
 
     #Adding submit & exit buttons
-    Button(op3p2,text="Submit", width=6, command=clickop3p2) .grid(row=10,column=1,sticky=W)
-    Button(op3p2,text="Quit", width=6, command=op3p2.destroy) .grid(row=10,column=2,sticky=W)
+    btn = Button(op3p2,text="Submit", width=6, command=clickop3p2)
+    btn.place(x=185, y=260)
+
+    btn1 = Button(op3p2,text="Quit", width=6, command=op3p2.destroy)
+    btn1.place(x=285, y=260)
 
     op3p2.mainloop()
-
 
 # Option 4.2 Function
 def op4p2 ():
@@ -757,42 +884,60 @@ def op4p2 ():
     # Creating the layout
     op4p2 = Tk()
     op4p2.title("Comparing Yearly WindSpeed (mph)")
-    op4p2.geometry('500x320')
-    op4p2.configure(background="grey")
+    op4p2.configure(background="yellow")
 
-    ttk.Label(op4p2, text = "Comparing Yearly WindSpeed (mph)", 
-          background = 'black', foreground ="white", 
-          font = ("Times New Roman", 15)).grid(row = 0, column = 1)
+    #App placement
+    app_width = 500
+    app_height = 320
+
+    screen_width = op4p2.winfo_screenwidth()
+    screen_height = op4p2.winfo_screenheight()
+
+    x = (screen_width / 2) - (app_width / 2)
+    y = (screen_height / 2) - (app_height / 2)
+
+    op4p2.geometry(f'{app_width}x{app_height}+{int(x)}+{int(y)}')
+
+    lbl0 = ttk.Label(op4p2, text = "Comparing Yearly WindSpeed (mph)", 
+          background = 'yellow', foreground ="black", 
+          font = ("Times New Roman", 15))
+    lbl0.place(x=100, y=20)
 
     # Year Selection 1 by creating labels, comboboxes & combobox drop down lists
-    ttk.Label(op4p2, text = "Select Year 1 :",
-          font = ("Times New Roman", 10)).grid(column = 0,
-          row = 5, padx = 10, pady = 25)     
+    lbl1 = ttk.Label(op4p2, text = "Select Year 1 :",
+          background = 'yellow', foreground ="black", 
+          font = ("Times New Roman", 10))
+    lbl1.place(x=80, y=100)
+          
     n = tk.StringVar()
     yearchoosen1 = ttk.Combobox(op4p2, width = 27, textvariable = n)
     yearchoosen1['values'] = years
-    yearchoosen1.grid(column = 1, row = 5)
     yearchoosen1.current()
+    yearchoosen1.place(x=180, y=100)
 
     # Year Selection 2 by creating labels, comboboxes & combobox drop down lists
-    ttk.Label(op4p2, text = "Select Year 2 :",
-          font = ("Times New Roman", 10)).grid(column = 0,
-          row = 7, padx = 10, pady = 25)  
+    lbl2 = ttk.Label(op4p2, text = "Select Year 2 :",
+        background = 'yellow', foreground ="black", 
+          font = ("Times New Roman", 10))
+    lbl2.place(x=80, y=155)
+
     n = tk.StringVar()
     yearchoosen2 = ttk.Combobox(op4p2, width = 27, textvariable = n)
     yearchoosen2['values'] = years
-    yearchoosen2.grid(column = 1, row = 7)
     yearchoosen2.current()
+    yearchoosen2.place(x=180, y=155)
 
     # Year Selection 3 by creating labels, comboboxes & combobox drop down lists
-    ttk.Label(op4p2, text = "Select Year 3 :",
-          font = ("Times New Roman", 10)).grid(column = 0,
-          row = 9, padx = 10, pady = 25)  
+    lbl3 = ttk.Label(op4p2, text = "Select Year 3 :",
+          background = 'yellow', foreground ="black",
+          font = ("Times New Roman", 10))       
+    lbl3.place(x=80, y=210)
+
     n = tk.StringVar()
     yearchoosen3 = ttk.Combobox(op4p2, width = 27, textvariable = n)
     yearchoosen3['values'] = years
-    yearchoosen3.grid(column = 1, row = 9)
     yearchoosen3.current()
+    yearchoosen3.place(x=180, y=210)
 
     # Submit button function to make ComPlot
     def clickop4p2():
@@ -804,98 +949,63 @@ def op4p2 ():
         makeComPlot(yearSelections,'WindSpeed')
 
     #Adding submit & exit buttons
-    Button(op4p2,text="Submit", width=6, command=clickop4p2) .grid(row=10,column=1,sticky=W)
-    Button(op4p2,text="Quit", width=6, command=op4p2.destroy) .grid(row=10,column=2,sticky=W)
+    btn = Button(op4p2,text="Submit", width=6, command=clickop4p2)
+    btn.place(x=185, y=260)
+
+    btn1 = Button(op4p2,text="Quit", width=6, command=op4p2.destroy)
+    btn1.place(x=285, y=260)
 
     op4p2.mainloop()
 
-
-# Option 5.2 Function
-def op5p2 ():
-
-    # Creating the layout
-    op5p2 = Tk()
-    op5p2.title("Comparing Yearly Pressure (Hg)")
-    op5p2.geometry('500x320')
-    op5p2.configure(background="grey")
-
-    ttk.Label(op5p2, text = "Comparing Yearly Pressure (Hg)", 
-          background = 'black', foreground ="white", 
-          font = ("Times New Roman", 15)).grid(row = 0, column = 1)
-
-    # Year Selection 1 by creating labels, comboboxes & combobox drop down lists
-    ttk.Label(op5p2, text = "Select Year 1 :",
-          font = ("Times New Roman", 10)).grid(column = 0,
-          row = 5, padx = 10, pady = 25)     
-    n = tk.StringVar()
-    yearchoosen1 = ttk.Combobox(op5p2, width = 27, textvariable = n)
-    yearchoosen1['values'] = years
-    yearchoosen1.grid(column = 1, row = 5)
-    yearchoosen1.current()
-
-    # Year Selection 2 by creating labels, comboboxes & combobox drop down lists
-    ttk.Label(op5p2, text = "Select Year 2 :",
-          font = ("Times New Roman", 10)).grid(column = 0,
-          row = 7, padx = 10, pady = 25)  
-    n = tk.StringVar()
-    yearchoosen2 = ttk.Combobox(op5p2, width = 27, textvariable = n)
-    yearchoosen2['values'] = years
-    yearchoosen2.grid(column = 1, row = 7)
-    yearchoosen2.current()
-
-    # Year Selection 3 by creating labels, comboboxes & combobox drop down lists
-    ttk.Label(op5p2, text = "Select Year 3 :",
-          font = ("Times New Roman", 10)).grid(column = 0,
-          row = 9, padx = 10, pady = 25)  
-    n = tk.StringVar()
-    yearchoosen3 = ttk.Combobox(op5p2, width = 27, textvariable = n)
-    yearchoosen3['values'] = years
-    yearchoosen3.grid(column = 1, row = 9)
-    yearchoosen3.current()
-
-    # Submit button function to make ComPlot
-    def clickop5p2():
-        year1= yearchoosen1.get()
-        year2= yearchoosen2.get()
-        year3= yearchoosen3.get()
-        yearSelections = [year1, year2, year3]
-
-        makeComPlot(yearSelections,'Pressure')
-
-    #Adding submit & exit buttons
-    Button(op5p2,text="Submit", width=6, command=clickop5p2) .grid(row=10,column=1,sticky=W)
-    Button(op5p2,text="Quit", width=6, command=op5p2.destroy) .grid(row=10,column=2,sticky=W)
-
-    op5p2.mainloop()
 #---------------------------------------------------------------------------------------------------------------
 #Option 6
 def TempComp ():
     TempComp = Tk()
     TempComp.title("Temperature")
-    TempComp.geometry('500x320')
-    TempComp.configure(background="grey")
+    TempComp.configure(background="light yellow")
 
-    ttk.Label(TempComp, text = "Temperature", 
-          background = 'black', foreground ="white", 
-          font = ("Times New Roman", 15)).grid(row = 0, column = 2)
+    #App placement
+    app_width = 500
+    app_height = 320
+
+    screen_width = TempComp.winfo_screenwidth()
+    screen_height = TempComp.winfo_screenheight()
+
+    x = (screen_width / 2) - (app_width / 2)
+    y = (screen_height / 2) - (app_height / 2)
+
+    TempComp.geometry(f'{app_width}x{app_height}+{int(x)}+{int(y)}')
+
+    lbl = ttk.Label(TempComp, text = "Temperature", 
+          background = 'light yellow', foreground ="black", 
+          font = ("Times New Roman", 15))
+    lbl.place(x=200, y=20)
     
 # label max/average/min 
-    ttk.Label(TempComp, text = "Select first Year :",
-          font = ("Times New Roman", 10)).grid(column = 0,
-          row = 5, padx = 10, pady = 25)  
+    lbl1 = ttk.Label(TempComp, text = "Select first Year :",
+        background = 'light yellow', foreground ="black",
+        font = ("Times New Roman", 10))
+    lbl1.place(x=80, y=80)  
 
-    ttk.Label(TempComp, text = "Select second Year :",
-          font = ("Times New Roman", 10)).grid ( padx = 20, pady = 50)        
+    lbl2 = ttk.Label(TempComp, text = "Select second Year :",
+        background = 'light yellow', foreground ="black",
+        font = ("Times New Roman", 10))
+    lbl2.place(x=80, y=138)        
 
-    
 # Combobox creation
     n = tk.StringVar()
     m = tk.StringVar()
+
     yearchoosen = ttk.Combobox(TempComp, width = 27, textvariable = n)
+    
     yearchoosen2 = ttk.Combobox(TempComp, width = 27, textvariable = m)
 
 # Adding combobox drop down list
-    yearchoosen['values'] = ('2013',
+    yearchoosen['values'] = ('2009',
+                        '2010',
+                        '2011',
+                        '2012',
+                        '2013',
                          '2014',
                          '2015',
                           '2016',
@@ -903,10 +1013,14 @@ def TempComp ():
                           '2018',
                           '2019',
                           '2020')
-    yearchoosen.grid(column = 1, row = 5)
+    yearchoosen.place(x=200, y=80)
     yearchoosen.current()
     
-    yearchoosen2['values'] = ('2013',
+    yearchoosen2['values'] = ('2009',
+                        '2010',
+                        '2011',
+                        '2012',
+                        '2013',
                          '2014',
                          '2015',
                           '2016',
@@ -914,13 +1028,14 @@ def TempComp ():
                           '2018',
                           '2019',
                           '2020')
-    yearchoosen2.grid(column = 1, row = 6)
+    yearchoosen2.place(x=200, y=138)
     yearchoosen2.current()
 
 # label year
-    ttk.Label(TempComp, text = "Select the value :",
-          font = ("Times New Roman", 10)).grid(column = 0,
-          row = 7, padx = 10, pady = 25)  
+    lbl5 = ttk.Label(TempComp, text = "Select the value :",
+        background = 'light yellow', foreground ="black",
+        font = ("Times New Roman", 10))
+    lbl5.place(x=80, y=200)
 
 # Combobox creation
     n = tk.StringVar()
@@ -930,7 +1045,7 @@ def TempComp ():
     typevalue['values'] = ('Minimum', 
                           'Average',
                           'Maximum')
-    typevalue.grid(column = 1, row = 7)
+    typevalue.place(x=200, y=200)
     typevalue.current()
 
 #Submitbutton function
@@ -939,46 +1054,67 @@ def TempComp ():
         year_b = yearchoosen2.get()
         value_type = typevalue.get()
         data_type='temperature'
-       
         
         maketwoPlots(year_a, year_b, data_type, value_type)
 
 #addbutton 
-    Button(TempComp,text="Submit", width=6, command=click6) .grid(row=8,column=1,sticky=W)
+    lbl6 = Button(TempComp,text="Submit", width=6, command=click6)
+    lbl6.place(x=220, y=245)
 
 #add exit button
-    Button(TempComp,text="Quit", width=6, command=TempComp.destroy) .grid(row=8,column=2,sticky=W)
-    
+    lbl7 = Button(TempComp,text="Quit", width=6, command=TempComp.destroy)
+    lbl7.place(x=315, y=245)
+
     TempComp.mainloop()
 
 #Option7
 def DewComp ():
     DewComp = Tk()
-    DewComp.title("Drew Point (Degrees F)")
-    DewComp.geometry('500x320')
-    DewComp.configure(background="grey")
+    DewComp.title("Dew Point")
+    DewComp.configure(background="light yellow")
 
-    ttk.Label(DewComp, text = "Drew Point(Degrees F)", 
-          background = 'black', foreground ="white", 
-          font = ("Times New Roman", 15)).grid(row = 0, column = 2)
+    #App placement
+    app_width = 500
+    app_height = 320
+
+    screen_width = DewComp.winfo_screenwidth()
+    screen_height = DewComp.winfo_screenheight()
+
+    x = (screen_width / 2) - (app_width / 2)
+    y = (screen_height / 2) - (app_height / 2)
+
+    DewComp.geometry(f'{app_width}x{app_height}+{int(x)}+{int(y)}')
+
+    lbl = ttk.Label(DewComp, text = "Dew Point", 
+          background = 'light yellow', foreground ="black", 
+          font = ("Times New Roman", 15))
+    lbl.place(x=200, y=20)
     
 # label max/average/min 
-    ttk.Label(DewComp, text = "Select first Year :",
-          font = ("Times New Roman", 10)).grid(column = 0,
-          row = 5, padx = 10, pady = 25)  
+    lbl1 = ttk.Label(DewComp, text = "Select first Year :",
+        background = 'light yellow', foreground ="black",
+        font = ("Times New Roman", 10))
+    lbl1.place(x=80, y=80)  
 
-    ttk.Label(DewComp, text = "Select second Year :",
-          font = ("Times New Roman", 10)).grid ( padx = 20, pady = 50)        
+    lbl2 = ttk.Label(DewComp, text = "Select second Year :",
+        background = 'light yellow', foreground ="black",
+        font = ("Times New Roman", 10))
+    lbl2.place(x=80, y=138)        
 
-    
 # Combobox creation
     n = tk.StringVar()
     m = tk.StringVar()
+
     yearchoosen = ttk.Combobox(DewComp, width = 27, textvariable = n)
+    
     yearchoosen2 = ttk.Combobox(DewComp, width = 27, textvariable = m)
 
 # Adding combobox drop down list
-    yearchoosen['values'] = ('2013',
+    yearchoosen['values'] = ('2009',
+                        '2010',
+                        '2011',
+                        '2012',
+                        '2013',
                          '2014',
                          '2015',
                           '2016',
@@ -986,10 +1122,14 @@ def DewComp ():
                           '2018',
                           '2019',
                           '2020')
-    yearchoosen.grid(column = 1, row = 5)
+    yearchoosen.place(x=200, y=80)
     yearchoosen.current()
     
-    yearchoosen2['values'] = ('2013',
+    yearchoosen2['values'] = ('2009',
+                        '2010',
+                        '2011',
+                        '2012',
+                        '2013',
                          '2014',
                          '2015',
                           '2016',
@@ -997,13 +1137,14 @@ def DewComp ():
                           '2018',
                           '2019',
                           '2020')
-    yearchoosen2.grid(column = 1, row = 6)
+    yearchoosen2.place(x=200, y=138)
     yearchoosen2.current()
 
 # label year
-    ttk.Label(DewComp, text = "Select the value :",
-          font = ("Times New Roman", 10)).grid(column = 0,
-          row = 7, padx = 10, pady = 25)  
+    lbl5 = ttk.Label(DewComp, text = "Select the value :",
+        background = 'light yellow', foreground ="black",
+        font = ("Times New Roman", 10))
+    lbl5.place(x=80, y=200)
 
 # Combobox creation
     n = tk.StringVar()
@@ -1013,56 +1154,76 @@ def DewComp ():
     typevalue['values'] = ('Minimum', 
                           'Average',
                           'Maximum')
-    typevalue.grid(column = 1, row = 7)
+    typevalue.place(x=200, y=200)
     typevalue.current()
 
 #Submitbutton function
-    def click7():
+    def click6():
         year_a = yearchoosen.get()
         year_b = yearchoosen2.get()
         value_type = typevalue.get()
         data_type='DewPoint'
-       
         
         maketwoPlots(year_a, year_b, data_type, value_type)
 
 #addbutton 
-    Button(DewComp,text="Submit", width=6, command=click7) .grid(row=8,column=1,sticky=W)
+    lbl6 = Button(DewComp,text="Submit", width=6, command=click6)
+    lbl6.place(x=220, y=245)
 
 #add exit button
-    Button(DewComp,text="Quit", width=6, command=DewComp.destroy) .grid(row=8,column=2,sticky=W)
-    
-    DewComp.mainloop()
+    lbl7 = Button(DewComp,text="Quit", width=6, command=DewComp.destroy)
+    lbl7.place(x=315, y=245)
 
+    DewComp.mainloop()
 
 #Option8
 def HumidityComp ():
     HumidityComp = Tk()
-    HumidityComp.title("Humidity (%)")
-    HumidityComp.geometry('500x320')
-    HumidityComp.configure(background="grey")
- 
-    ttk.Label(HumidityComp, text = "Humidity (%)", 
-          background = 'black', foreground ="white", 
-          font = ("Times New Roman", 15)).grid(row = 0, column = 2)
+    HumidityComp.title("Humidity")
+    HumidityComp.configure(background="light yellow")
+
+    #App placement
+    app_width = 500
+    app_height = 320
+
+    screen_width = HumidityComp.winfo_screenwidth()
+    screen_height = HumidityComp.winfo_screenheight()
+
+    x = (screen_width / 2) - (app_width / 2)
+    y = (screen_height / 2) - (app_height / 2)
+
+    HumidityComp.geometry(f'{app_width}x{app_height}+{int(x)}+{int(y)}')
+
+    lbl = ttk.Label(HumidityComp, text = "Humidity", 
+          background = 'light yellow', foreground ="black", 
+          font = ("Times New Roman", 15))
+    lbl.place(x=200, y=20)
     
 # label max/average/min 
-    ttk.Label(HumidityComp, text = "Select first Year :",
-          font = ("Times New Roman", 10)).grid(column = 0,
-          row = 5, padx = 10, pady = 25)  
+    lbl1 = ttk.Label(HumidityComp, text = "Select first Year :",
+        background = 'light yellow', foreground ="black",
+        font = ("Times New Roman", 10))
+    lbl1.place(x=80, y=80)  
 
-    ttk.Label(HumidityComp, text = "Select second Year :",
-          font = ("Times New Roman", 10)).grid ( padx = 20, pady = 50)        
+    lbl2 = ttk.Label(HumidityComp, text = "Select second Year :",
+        background = 'light yellow', foreground ="black",
+        font = ("Times New Roman", 10))
+    lbl2.place(x=80, y=138)        
 
-    
 # Combobox creation
     n = tk.StringVar()
     m = tk.StringVar()
+
     yearchoosen = ttk.Combobox(HumidityComp, width = 27, textvariable = n)
+    
     yearchoosen2 = ttk.Combobox(HumidityComp, width = 27, textvariable = m)
 
 # Adding combobox drop down list
-    yearchoosen['values'] = ('2013',
+    yearchoosen['values'] = ('2009',
+                        '2010',
+                        '2011',
+                        '2012',
+                        '2013',
                          '2014',
                          '2015',
                           '2016',
@@ -1070,10 +1231,14 @@ def HumidityComp ():
                           '2018',
                           '2019',
                           '2020')
-    yearchoosen.grid(column = 1, row = 5)
+    yearchoosen.place(x=200, y=80)
     yearchoosen.current()
     
-    yearchoosen2['values'] = ('2013',
+    yearchoosen2['values'] = ('2009',
+                        '2010',
+                        '2011',
+                        '2012',
+                        '2013',
                          '2014',
                          '2015',
                           '2016',
@@ -1081,13 +1246,14 @@ def HumidityComp ():
                           '2018',
                           '2019',
                           '2020')
-    yearchoosen2.grid(column = 1, row = 6)
+    yearchoosen2.place(x=200, y=138)
     yearchoosen2.current()
 
 # label year
-    ttk.Label(HumidityComp, text = "Select the value :",
-          font = ("Times New Roman", 10)).grid(column = 0,
-          row = 7, padx = 10, pady = 25)  
+    lbl5 = ttk.Label(HumidityComp, text = "Select the value :",
+        background = 'light yellow', foreground ="black",
+        font = ("Times New Roman", 10))
+    lbl5.place(x=80, y=200)
 
 # Combobox creation
     n = tk.StringVar()
@@ -1097,55 +1263,76 @@ def HumidityComp ():
     typevalue['values'] = ('Minimum', 
                           'Average',
                           'Maximum')
-    typevalue.grid(column = 1, row = 7)
+    typevalue.place(x=200, y=200)
     typevalue.current()
 
 #Submitbutton function
-    def click8():
+    def click6():
         year_a = yearchoosen.get()
         year_b = yearchoosen2.get()
         value_type = typevalue.get()
         data_type='Humidity'
-       
         
         maketwoPlots(year_a, year_b, data_type, value_type)
 
 #addbutton 
-    Button(HumidityComp,text="Submit", width=6, command=click8) .grid(row=8,column=1,sticky=W)
+    lbl6 = Button(HumidityComp,text="Submit", width=6, command=click6)
+    lbl6.place(x=220, y=245)
 
 #add exit button
-    Button(HumidityComp,text="Quit", width=6, command=HumidityComp.destroy) .grid(row=8,column=2,sticky=W)
-    
+    lbl7 = Button(HumidityComp,text="Quit", width=6, command=HumidityComp.destroy)
+    lbl7.place(x=315, y=245)
+
     HumidityComp.mainloop()
  
  #Option9
 def WindComp ():
     WindComp = Tk()
-    WindComp.title("Wind Speed (mph)")
-    WindComp.geometry('500x320')
-    WindComp.configure(background="grey")
+    WindComp.title("Wind Speed")
+    WindComp.configure(background="light yellow")
 
-    ttk.Label(WindComp, text = "Wind Speed (mph)", 
-          background = 'black', foreground ="white", 
-          font = ("Times New Roman", 15)).grid(row = 0, column = 2)
+    #App placement
+    app_width = 500
+    app_height = 320
+
+    screen_width = WindComp.winfo_screenwidth()
+    screen_height = WindComp.winfo_screenheight()
+
+    x = (screen_width / 2) - (app_width / 2)
+    y = (screen_height / 2) - (app_height / 2)
+
+    WindComp.geometry(f'{app_width}x{app_height}+{int(x)}+{int(y)}')
+
+    lbl = ttk.Label(WindComp, text = "Wind Speed", 
+          background = 'light yellow', foreground ="black", 
+          font = ("Times New Roman", 15))
+    lbl.place(x=200, y=20)
     
 # label max/average/min 
-    ttk.Label(WindComp, text = "Select first Year :",
-          font = ("Times New Roman", 10)).grid(column = 0,
-          row = 5, padx = 10, pady = 25)  
+    lbl1 = ttk.Label(WindComp, text = "Select first Year :",
+        background = 'light yellow', foreground ="black",
+        font = ("Times New Roman", 10))
+    lbl1.place(x=80, y=80)  
 
-    ttk.Label(WindComp, text = "Select second Year :",
-          font = ("Times New Roman", 10)).grid ( padx = 20, pady = 50)        
+    lbl2 = ttk.Label(WindComp, text = "Select second Year :",
+        background = 'light yellow', foreground ="black",
+        font = ("Times New Roman", 10))
+    lbl2.place(x=80, y=138)        
 
-    
 # Combobox creation
     n = tk.StringVar()
     m = tk.StringVar()
+
     yearchoosen = ttk.Combobox(WindComp, width = 27, textvariable = n)
+    
     yearchoosen2 = ttk.Combobox(WindComp, width = 27, textvariable = m)
 
 # Adding combobox drop down list
-    yearchoosen['values'] = ('2013',
+    yearchoosen['values'] = ('2009',
+                        '2010',
+                        '2011',
+                        '2012',
+                        '2013',
                          '2014',
                          '2015',
                           '2016',
@@ -1153,10 +1340,14 @@ def WindComp ():
                           '2018',
                           '2019',
                           '2020')
-    yearchoosen.grid(column = 1, row = 5)
+    yearchoosen.place(x=200, y=80)
     yearchoosen.current()
     
-    yearchoosen2['values'] = ('2013',
+    yearchoosen2['values'] = ('2009',
+                        '2010',
+                        '2011',
+                        '2012',
+                        '2013',
                          '2014',
                          '2015',
                           '2016',
@@ -1164,13 +1355,14 @@ def WindComp ():
                           '2018',
                           '2019',
                           '2020')
-    yearchoosen2.grid(column = 1, row = 6)
+    yearchoosen2.place(x=200, y=138)
     yearchoosen2.current()
 
 # label year
-    ttk.Label(WindComp, text = "Select the value :",
-          font = ("Times New Roman", 10)).grid(column = 0,
-          row = 7, padx = 10, pady = 25)  
+    lbl5 = ttk.Label(WindComp, text = "Select the value :",
+        background = 'light yellow', foreground ="black",
+        font = ("Times New Roman", 10))
+    lbl5.place(x=80, y=200)
 
 # Combobox creation
     n = tk.StringVar()
@@ -1180,24 +1372,25 @@ def WindComp ():
     typevalue['values'] = ('Minimum', 
                           'Average',
                           'Maximum')
-    typevalue.grid(column = 1, row = 7)
+    typevalue.place(x=200, y=200)
     typevalue.current()
 
 #Submitbutton function
-    def click9():
+    def click6():
         year_a = yearchoosen.get()
         year_b = yearchoosen2.get()
         value_type = typevalue.get()
-        data_type='WindSpeed'
-       
+        data_type='WindComp'
         
         maketwoPlots(year_a, year_b, data_type, value_type)
 
 #addbutton 
-    Button(WindComp,text="Submit", width=6, command=click9) .grid(row=8,column=1,sticky=W)
+    lbl6 = Button(WindComp,text="Submit", width=6, command=click6)
+    lbl6.place(x=220, y=245)
 
 #add exit button
-    Button(WindComp,text="Quit", width=6, command=WindComp.destroy) .grid(row=8,column=2,sticky=W)
+    lbl7 = Button(WindComp,text="Quit", width=6, command=WindComp.destroy)
+    lbl7.place(x=315, y=245)
 
     WindComp.mainloop()
 
