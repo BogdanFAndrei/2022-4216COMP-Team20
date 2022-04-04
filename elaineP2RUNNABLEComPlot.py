@@ -110,12 +110,10 @@ def makeComPlot(year, data_type):
         ylabel="Humidity (%)"
     if (data_type=='WindSpeed'):
         ylabel="Wind Speed (mph)"
-    if (data_type=='Pressure'):
-        ylabel="Pressure (Hg)"
 
     # Creating a figure and adding a title, y and x labels and a grid
     plt.figure(figsize=(12,5))
-    plt.title(f"Comparing the maximum, mean & minimum pressure values of {year[0]}, {year[1]} & {year[2]}")
+    plt.title(f"Comparing the maximum, mean & minimum {data_type} values of {year[0]}, {year[1]} & {year[2]}")
     plt.ylabel(ylabel)
     plt.xlabel('Years')
     plt.grid(axis= 'y')

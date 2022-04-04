@@ -157,10 +157,10 @@ def main ():
           font = ("Times New Roman", 15))      
     ml5.place(x=50, y=50)
 
-    btn1 = Button(mai,text="Temperature (Degrees F)", width=20, command=op1)
+    btn1 = Button(mai,text="Temperature (° F)", width=20, command=op1)
     btn1.place(x=10, y=100)
    
-    btn2 = Button(mai,text="Drew Point (Degrees F)", width=20, command=op2)
+    btn2 = Button(mai,text="Drew Point (° F)", width=20, command=op2)
     btn2.place(x=10, y=150)
 
     btn3 = Button(mai,text="Humidity (%)", width=20, command=op3)
@@ -175,10 +175,10 @@ def main ():
           font = ("Times New Roman", 15))      
     ml5.place(x=240, y=50)
 
-    btn6 = Button(mai,text="Temperature (Degrees F)", width=20, command=TempComp)
+    btn6 = Button(mai,text="Temperature (° F)", width=20, command=TempComp)
     btn6.place(x=205, y=100)
 
-    btn7 = Button(mai,text="Dew Point (Degrees F)", width=20, command=DewComp)
+    btn7 = Button(mai,text="Dew Point (° F)", width=20, command=DewComp)
     btn7.place(x=205, y=150)
 
     btn8 = Button(mai,text="Humidity (%)", width=20, command=HumidityComp)
@@ -193,10 +193,10 @@ def main ():
           font = ("Times New Roman", 15))      
     ml5.place(x=430, y=50)
 
-    btn10 = Button(mai,text="Temperature (Degrees F)", width=20, command=op1p2)
+    btn10 = Button(mai,text="Temperature (° F)", width=20, command=op1p2)
     btn10.place(x=400, y=100)
     
-    btn11 = Button(mai,text="Drew Point (Degrees F)", width=20, command=op2p2)
+    btn11 = Button(mai,text="Dew Point (° F)", width=20, command=op2p2)
     btn11.place(x=400, y=150)
     
     btn12 =Button(mai,text="Humidity (%)", width=20, command=op3p2)
@@ -213,7 +213,7 @@ bntStart1.place(x=180, y=300)
 #Option 1 Function
 def op1 ():
     op1 = Tk()
-    op1.title("Temperature (Degrees F)")
+    op1.title("Temperature (° F)")
     op1.configure(background="darkorange")
 
     #App placement
@@ -228,7 +228,7 @@ def op1 ():
 
     op1.geometry(f'{app_width}x{app_height}+{int(x)}+{int(y)}')
 
-    lbl = ttk.Label(op1, text = "Temperature (Degrees F)",
+    lbl = ttk.Label(op1, text = "Temperature (° F)",
           background = 'darkorange', foreground ="black",
           font = ("Times New Roman", 15))
     lbl.place(x=80, y=18)
@@ -299,7 +299,7 @@ def op1 ():
     #Option 2 Function
 def op2 ():
     op2 = Tk()
-    op2.title("Dew Point (Degrees F)")
+    op2.title("Dew Point (° F)")
     op2.configure(background="darkorange")
 
     #App placement
@@ -314,7 +314,7 @@ def op2 ():
 
     op2.geometry(f'{app_width}x{app_height}+{int(x)}+{int(y)}')
 
-    lbl = ttk.Label(op2, text = "Dew Point (Degrees F)",
+    lbl = ttk.Label(op2, text = "Dew Point (° F)",
           background = 'darkorange', foreground ="black",
           font = ("Times New Roman", 15))
     lbl.place(x=80, y=18)
@@ -575,6 +575,7 @@ def findMeanValueYear(year_a, data_type):
 
     return meanValueYear
 
+
 # Finding min temp of a year
 def findMinValueYear(year_a, data_type):
     minValueYear=[]
@@ -585,58 +586,42 @@ def findMinValueYear(year_a, data_type):
 
     return minValueYear
 
-# Function to plot all the maxValues
-def plotMaxValueCom(maxValues, years):
-    plt.plot(years,maxValues, 'dk',markersize = 10, color='blue',linestyle='',markerfacecolor='blue', label="Maximum")
-
-# Function to plot all the meanValues  
-def plotMeanValueCom(meanValues, years):
-    plt.plot(years,meanValues, 'sk',markersize = 10, color='magenta',linestyle='',markerfacecolor='magenta', label="Mean")
-
-
-# Function to plot all the minValues   
-def plotMinValueCom(minValues, years):
-    plt.plot(years,minValues, 'ok', markersize = 10, color='red',linestyle='',markerfacecolor='red', label="Minimum")
-
-
-# Function to make a single comparison graph. Plots for 1 year.
+# Function to make a single comparison graph. 
 def makeComPlot(year, data_type):
 
+    # Getting max, mean and min values to plot
     maxValuesYear = findMaxValueYear(year, data_type)
     meanValuesYear = findMeanValueYear(year, data_type)
     minValuesYear = findMinValueYear(year, data_type)
     
-    plt.figure(figsize=(12,5))
-    plt.grid(axis= 'y')
-    plt.xlabel('Years')
-    
-    # Setting the title and y axis labels
+    # Gathering better y axis labels that includes the measurements
     if (data_type=='temperature'):
-        measurement="(° F)"
-        title=f"Comparing the maximum, mean & minimum temperature values of {year[0]}, {year[1]} & {year[2]}"
+        ylabel="Temperature (° F)"
     if (data_type=='DewPoint'):
-        measurement="(° F)"
-        title=f"Comparing the maximum, mean & minimum dew point values of {year[0]}, {year[1]} & {year[2]}"
+        ylabel="Dew Point (° F)"
     if (data_type=='Humidity'):
-        measurement="(%)"
-        title=f"Comparing the maximum, mean & minimum humidity values of {year[0]}, {year[1]} & {year[2]}"
+        ylabel="Humidity (%)"
     if (data_type=='WindSpeed'):
-        measurement="(mph)"
-        title=f"Comparing the maximum, mean & minimum wind speed values of {year[0]}, {year[1]} & {year[2]}"
-    if (data_type=='Pressure'):
-        measurement="(Hg)"
-        title=f"Comparing the maximum, mean & minimum pressure values of {year[0]}, {year[1]} & {year[2]}"
-    plt.title(title)
-    plt.ylabel(data_type + " " + measurement)
-    
-    # Adding vertical lines
+        ylabel="Wind Speed (mph)"
+
+    # Creating a figure and adding a title, y and x labels and a grid
+    plt.figure(figsize=(12,5))
+    plt.title(f"Comparing the maximum, mean & minimum {data_type} values of {year[0]}, {year[1]} & {year[2]}")
+    plt.ylabel(ylabel)
+    plt.xlabel('Years')
+    plt.grid(axis= 'y')
+
+    # Adding vertical lines between the points 
     plt.vlines(x=year, ymin=minValuesYear, ymax=[maxValuesYear], colors='black', ls='-', lw=2)
 
-    # Plotting and adding a legend
-    plotMaxValueCom(maxValuesYear, year)
-    plotMeanValueCom(meanValuesYear, year)
-    plotMinValueCom(minValuesYear, year)
+    # Plotting 
+    plt.plot(year,maxValuesYear, 'dk',markersize = 10, color='blue',linestyle='',markerfacecolor='blue', label="Maximum")
+    plt.plot(year,meanValuesYear, 'sk',markersize = 10, color='magenta',linestyle='',markerfacecolor='magenta', label="Mean")
+    plt.plot(year,minValuesYear, 'ok', markersize = 10, color='red',linestyle='',markerfacecolor='red', label="Minimum")
+
+    # Adding a legend
     plt.legend(bbox_to_anchor=(1.1, 1.05))
+
     plt.show()
 
 years = ['2009','2010','2011','2012','2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020']
@@ -883,7 +868,7 @@ def op4p2 ():
 
     # Creating the layout
     op4p2 = Tk()
-    op4p2.title("Comparing Yearly WindSpeed (mph)")
+    op4p2.title("Comparing Yearly Wind Speed (mph)")
     op4p2.configure(background="yellow")
 
     #App placement
