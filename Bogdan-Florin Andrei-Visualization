@@ -200,3 +200,31 @@ Button(window,text="Quit", width=6, command=window.destroy) .grid(row=8,column=2
 
 
 window.mainloop()
+
+
+
+#Old data visualization
+#2009 average dew point
+with open(filename, 'r') as csvfile:
+    datareader = csv.reader(csvfile)
+    tempmin2020 = []
+    counter = 0
+    rowCounter = 1
+    
+    for row in datareader:
+        rowCounter=rowCounter+1
+        if (row[0] == 'Average2009'):
+            tempmin2020.append(float(row[6]))
+            counter= counter-1
+            print (tempmin2020)    
+        if (counter== 12): 
+            break 
+plt.figure(figsize=(12,5))
+Time2020=['January','February','March','April' ,'May','June','July','August','September','October','November','December']
+Temperature= [tempmin2020]
+plt.plot(Time2020,tempmin2020, '-ok',color='green',linestyle='dashed',markerfacecolor='blue')
+plt.grid(axis= 'y')
+plt.title('Average Dew Point 2009')
+plt.xlabel('Month')
+plt.ylabel('Dew Point (° F)')
+plt.show()
