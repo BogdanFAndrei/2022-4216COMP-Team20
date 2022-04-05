@@ -10,11 +10,11 @@ Instructions:
 --------------------------------------------------------------------------------------
 3 - click start
 --------------------------------------------------------------------------------------
-4 - click out of the 12 options provided
+4 - click out of the 4 options provided
 --------------------------------------------------------------------------------------
 5 - Input options out of the fields required
 --------------------------------------------------------------------------------------
-6 - Press 'Submit' to load your data visualisation
+6 - Press 'Submit' to load your data visualisation in a graph
 --------------------------------------------------------------------------------------
 7 - Press the 'Quit' button to exit or the X button on the top right.
 --------------------------------------------------------------------------------------
