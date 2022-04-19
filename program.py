@@ -1793,4 +1793,581 @@ def rn4():
     btn1.place(x=285, y=300)
 
     rn4.mainloop()
+    
+    from cProfile import label
+import tkinter as tk
+from tkinter import *
+from tkinter import ttk
+from unicodedata import decimal
+import csv
+import matplotlib.pyplot as plt
+from matplotlib.pyplot import figure
+import statistics
+from setuptools import Command
+
+def getYearData(year, data_type, value_type):
+    filename = 'FinallOneCSV.csv'
+    with open(filename, 'r') as csvfile:
+        datareader = csv.reader(csvfile)
+        yearData = []
+        for row in datareader:
+            if row[0].find('Average'+str(year)) != -1:
+                if(data_type == 'temperature'):
+                    if(value_type == 'Maximum'):
+                        yearData.append(float(row[2]))
+                    elif(value_type == 'Average'):
+                        yearData.append(float(row[3]))
+                    elif(value_type == 'Minimum'):
+                        yearData.append(float(row[4]))
+                elif(data_type == 'DewPoint'):
+                    if(value_type == 'Maximum'):
+                        yearData.append(float(row[5]))
+                    elif(value_type == 'Average'):
+                        yearData.append(float(row[6]))
+                    elif(value_type == 'Minimum'):
+                        yearData.append(float(row[7]))
+                elif(data_type == 'Humidity'):
+                    if(value_type == 'Maximum'):
+                        yearData.append(float(row[8]))
+                    elif(value_type == 'Average'):
+                        yearData.append(float(row[9]))
+                    elif(value_type == 'Minimum'):
+                        yearData.append(float(row[10]))
+                elif(data_type == 'WindSpeed'):
+                    if(value_type == 'Maximum'):
+                        yearData.append(float(row[11]))
+                    elif(value_type == 'Average'):
+                        yearData.append(float(row[12]))
+                    elif(value_type == 'Minimum'):
+                        yearData.append(float(row[13]))
+                elif(data_type == 'Pressure'):
+                    if(value_type == 'Maximum'):
+                        yearData.append(float(row[14]))
+                    elif(value_type == 'Average'):
+                        yearData.append(float(row[15]))
+                    elif(value_type == 'Minimum'):
+                        yearData.append(float(row[16]))
+    return yearData
+
+
+start = Tk()
+start.title("n Menu")
+start.configure(background="white")
+
+    #App placement
+app_width = 400
+app_height = 350
+
+screen_width = start.winfo_screenwidth()
+screen_height = start.winfo_screenheight()
+
+x = (screen_width / 2) - (app_width / 2)
+y = (screen_height / 2) - (app_height / 2)
+
+start.geometry(f'{app_width}x{app_height}+{int(x)}+{int(y)}')
+   
+    #Label for Main Menu
+mainlabel = ttk.Label(start, text = "\u0332".join("Main Menu"),
+          background = 'white', foreground ="Black",
+          font = ("Times New Roman", 15))      
+mainlabel.place(x=130, y=10)
+
+
+    # Finding max temp of a year
+def findMaxValueYear(year_a, data_type):
+    maxValueYear=[]
+    for year in year_a:
+        value_type = 'Maximum'
+        year_a_data=getYearData(year, data_type, value_type)
+        maxValueYear.append(max(year_a_data))
+
+    return maxValueYear
+
+# Finding mean temp of a year
+def findMeanValueYear(year_a, data_type):
+    meanValueYear=[]
+    for year in year_a:
+        value_type = 'Average'
+        year_a_data=getYearData(year, data_type, value_type)
+        meanValueYear.append(statistics.mean(year_a_data))
+
+    return meanValueYear
+
+# Finding min temp of a year
+def findMinValueYear(year_a, data_type):
+    minValueYear=[]
+    for year in year_a:
+        value_type = 'Minimum'
+        year_a_data=getYearData(year, data_type, value_type)
+        minValueYear.append(min(year_a_data))
+
+    return minValueYear
+
+def makefiveplot(year, data_type):
+
+    # Getting max, mean and min values to plot
+    maxValuesYear = findMaxValueYear(year, data_type)
+    meanValuesYear = findMeanValueYear(year, data_type)
+    minValuesYear = findMinValueYear(year, data_type)
+   
+    # Gathering better y axis labels that includes the measurements
+    if (data_type=='temperature'):
+        ylabel="Temperature (° F)"
+    if (data_type=='DewPoint'):
+        ylabel="Dew Point (° F)"
+    if (data_type=='Humidity'):
+        ylabel="Humidity (%)"
+    if (data_type=='WindSpeed'):
+        ylabel="Wind Speed (mph)"
+
+    # Creating a figure and adding a title, y and x labels and a grid
+    plt.figure(figsize=(12,5))
+    plt.title(f"Comparing the maximum, mean & minimum {data_type} values of {year[0]}, {year[1]} , {year[2]}, {year[3]}& {year[4]}")
+    plt.ylabel(ylabel)
+    plt.xlabel('Years')
+    plt.grid(axis= 'y')
+
+
+    # Plotting
+    plt.bar(year,maxValuesYear, s = 150, label="Maximum")
+    plt.bar(year,meanValuesYear, s = 150, label="Mean")
+    plt.bar(year,minValuesYear, s =150, label="Minimum")
+
+    # Adding a legend
+    plt.legend(bbox_to_anchor=(1.1, 1.05))
+
+    plt.show()
+
+years = ['2009','2010','2011','2012','2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020']
+
+
+def eb1():
+    eb1 = Tk()
+    eb1.title("Comparing Yearly Temperature (° F)")
+    eb1.configure(background="white")
+#App placement
+    app_width = 500
+    app_height = 450
+
+    screen_width = eb1.winfo_screenwidth()
+    screen_height = eb1.winfo_screenheight()
+
+    x = (screen_width / 2) - (app_width / 2)
+    y = (screen_height / 2) - (app_height / 2)
+
+    eb1.geometry(f'{app_width}x{app_height}+{int(x)}+{int(y)}')
+
+    lbl0 = ttk.Label(eb1, text = "Comparing Yearly Temperature (° F)",
+          background = 'white', foreground ="black",
+          font = ("Times New Roman", 15))
+    lbl0.place(x=100, y=20)
+
+    # Year Selection 1 by creating labels, comboboxes & combobox drop down lists
+    lbl1 = ttk.Label(eb1, text = "Select Year 1 :",
+          background = 'white', foreground ="black",
+          font = ("Times New Roman", 10))
+    lbl1.place(x=80, y=100)
+         
+    n = tk.StringVar()
+    yearchoosen1 = ttk.Combobox(eb1, width = 27, textvariable = n)
+    yearchoosen1['values'] = years
+    yearchoosen1.current()
+    yearchoosen1.place(x=180, y=100)
+
+    # Year Selection 2 by creating labels, comboboxes & combobox drop down lists
+    lbl2 = ttk.Label(eb1, text = "Select Year 2 :",
+        background = 'white', foreground ="black",
+          font = ("Times New Roman", 10))
+    lbl2.place(x=80, y=155)
+
+    n = tk.StringVar()
+    yearchoosen2 = ttk.Combobox(eb1, width = 27, textvariable = n)
+    yearchoosen2['values'] = years
+    yearchoosen2.current()
+    yearchoosen2.place(x=180, y=155)
+
+    # Year Selection 3 by creating labels, comboboxes & combobox drop down lists
+    lbl3 = ttk.Label(eb1, text = "Select Year 3 :",
+          background = 'white', foreground ="black",
+          font = ("Times New Roman", 10))      
+    lbl3.place(x=80, y=210)
+
+    n = tk.StringVar()
+    yearchoosen3 = ttk.Combobox(eb1, width = 27, textvariable = n)
+    yearchoosen3['values'] = years
+    yearchoosen3.current()
+    yearchoosen3.place(x=180, y=210)
+
+   
+    # Year Selection 4 by creating labels, comboboxes & combobox drop down lists
+    lbl4 = ttk.Label(eb1, text = "Select Year 4 :",
+          background = 'white', foreground ="black",
+          font = ("Times New Roman", 10))      
+    lbl4.place(x=80, y=265)
+
+    n = tk.StringVar()
+    yearchoosen4 = ttk.Combobox(eb1, width = 27, textvariable = n)
+    yearchoosen4['values'] = years
+    yearchoosen4.current()
+    yearchoosen4.place(x=180, y=265)
+
+  # Year Selection 5 by creating labels, comboboxes & combobox drop down lists
+    lbl4 = ttk.Label(eb1, text = "Select Year 5 :",
+          background = 'white', foreground ="black",
+          font = ("Times New Roman", 10))      
+    lbl4.place(x=80, y=320)
+
+    n = tk.StringVar()
+    yearchoosen5 = ttk.Combobox(eb1, width = 27, textvariable = n)
+    yearchoosen5['values'] = years
+    yearchoosen5.current()
+    yearchoosen5.place(x=180, y=320)
+
+        # Submit button function to make ComPlot
+    def clickeb1():
+        year1= yearchoosen1.get()
+        year2= yearchoosen2.get()
+        year3= yearchoosen3.get()
+        year4=yearchoosen4.get()
+        year5=yearchoosen5.get()
+        yearSelections = [year1, year2, year3,year4,year5]
+
+        makefiveplot(yearSelections,'temperature')
+
+    #Adding submit & exit buttons
+    btn = Button(eb1,text="Submit", width=6, command=clickeb1)
+    btn.place(x=185, y=365)
+
+    btn1 = Button(eb1,text="Quit", width=6, command=eb1.destroy)
+    btn1.place(x=285, y=365)
+
+    eb1.mainloop()
+
+def eb2():
+    eb2 = Tk()
+    eb2.title("Comparing Yearly Dew Point (° F)")
+    eb2.configure(background="white")
+#App placement
+    app_width = 500
+    app_height = 450
+
+    screen_width = eb2.winfo_screenwidth()
+    screen_height = eb2.winfo_screenheight()
+
+    x = (screen_width / 2) - (app_width / 2)
+    y = (screen_height / 2) - (app_height / 2)
+
+    eb2.geometry(f'{app_width}x{app_height}+{int(x)}+{int(y)}')
+
+    lbl0 = ttk.Label(eb2, text = "Comparing Yearly Dew Point (° F)",
+          background = 'white', foreground ="black",
+          font = ("Times New Roman", 15))
+    lbl0.place(x=100, y=20)
+
+    # Year Selection 1 by creating labels, comboboxes & combobox drop down lists
+    lbl1 = ttk.Label(eb2, text = "Select Year 1 :",
+          background = 'white', foreground ="black",
+          font = ("Times New Roman", 10))
+    lbl1.place(x=80, y=100)
+         
+    n = tk.StringVar()
+    yearchoosen1 = ttk.Combobox(eb2, width = 27, textvariable = n)
+    yearchoosen1['values'] = years
+    yearchoosen1.current()
+    yearchoosen1.place(x=180, y=100)
+
+    # Year Selection 2 by creating labels, comboboxes & combobox drop down lists
+    lbl2 = ttk.Label(eb2, text = "Select Year 2 :",
+        background = 'white', foreground ="black",
+          font = ("Times New Roman", 10))
+    lbl2.place(x=80, y=155)
+
+    n = tk.StringVar()
+    yearchoosen2 = ttk.Combobox(eb2, width = 27, textvariable = n)
+    yearchoosen2['values'] = years
+    yearchoosen2.current()
+    yearchoosen2.place(x=180, y=155)
+
+    # Year Selection 3 by creating labels, comboboxes & combobox drop down lists
+    lbl3 = ttk.Label(eb2, text = "Select Year 3 :",
+          background = 'white', foreground ="black",
+          font = ("Times New Roman", 10))      
+    lbl3.place(x=80, y=210)
+
+    n = tk.StringVar()
+    yearchoosen3 = ttk.Combobox(eb2, width = 27, textvariable = n)
+    yearchoosen3['values'] = years
+    yearchoosen3.current()
+    yearchoosen3.place(x=180, y=210)
+
+   
+    # Year Selection 4 by creating labels, comboboxes & combobox drop down lists
+    lbl4 = ttk.Label(eb2, text = "Select Year 4 :",
+          background = 'white', foreground ="black",
+          font = ("Times New Roman", 10))      
+    lbl4.place(x=80, y=265)
+
+    n = tk.StringVar()
+    yearchoosen4 = ttk.Combobox(eb2, width = 27, textvariable = n)
+    yearchoosen4['values'] = years
+    yearchoosen4.current()
+    yearchoosen4.place(x=180, y=265)
+
+      # Year Selection 5 by creating labels, comboboxes & combobox drop down lists
+    lbl4 = ttk.Label(eb2, text = "Select Year 5 :",
+          background = 'white', foreground ="black",
+          font = ("Times New Roman", 10))      
+    lbl4.place(x=80, y=320)
+
+    n = tk.StringVar()
+    yearchoosen5 = ttk.Combobox(eb2, width = 27, textvariable = n)
+    yearchoosen5['values'] = years
+    yearchoosen5.current()
+    yearchoosen5.place(x=180, y=320)
+
+        # Submit button function to make ComPlot
+    def clickeb2():
+        year1= yearchoosen1.get()
+        year2= yearchoosen2.get()
+        year3= yearchoosen3.get()
+        year4=yearchoosen4.get()
+        year5=yearchoosen5.get()
+        yearSelections = [year1, year2, year3,year4,year5]
+
+        makefiveplot(yearSelections,'dew point')
+
+    #Adding submit & exit buttons
+    btn = Button(eb2,text="Submit", width=6, command=clickeb2)
+    btn.place(x=185, y=365)
+
+    btn1 = Button(eb2,text="Quit", width=6, command=eb2.destroy)
+    btn1.place(x=285, y=365)
+
+
+    eb2.mainloop()
+
+def eb3():
+    eb3 = Tk()
+    eb3.title("Comparing Yearly Humidity")
+    eb3.configure(background="white")
+#App placement
+    app_width = 500
+    app_height = 450
+
+    screen_width = eb3.winfo_screenwidth()
+    screen_height = eb3.winfo_screenheight()
+
+    x = (screen_width / 2) - (app_width / 2)
+    y = (screen_height / 2) - (app_height / 2)
+
+    eb3.geometry(f'{app_width}x{app_height}+{int(x)}+{int(y)}')
+
+    lbl0 = ttk.Label(eb3, text = "Comparing Yearly Humidty",
+          background = 'purple', foreground ="black",
+          font = ("Times New Roman", 15))
+    lbl0.place(x=100, y=20)
+
+    # Year Selection 1 by creating labels, comboboxes & combobox drop down lists
+    lbl1 = ttk.Label(eb3, text = "Select Year 1 :",
+          background = 'purple', foreground ="black",
+          font = ("Times New Roman", 10))
+    lbl1.place(x=80, y=100)
+         
+    n = tk.StringVar()
+    yearchoosen1 = ttk.Combobox(eb3, width = 27, textvariable = n)
+    yearchoosen1['values'] = years
+    yearchoosen1.current()
+    yearchoosen1.place(x=180, y=100)
+
+    # Year Selection 2 by creating labels, comboboxes & combobox drop down lists
+    lbl2 = ttk.Label(eb3, text = "Select Year 2 :",
+        background = 'purple', foreground ="black",
+          font = ("Times New Roman", 10))
+    lbl2.place(x=80, y=155)
+
+    n = tk.StringVar()
+    yearchoosen2 = ttk.Combobox(eb3, width = 27, textvariable = n)
+    yearchoosen2['values'] = years
+    yearchoosen2.current()
+    yearchoosen2.place(x=180, y=155)
+
+    # Year Selection 3 by creating labels, comboboxes & combobox drop down lists
+    lbl3 = ttk.Label(eb3, text = "Select Year 3 :",
+          background = 'purple', foreground ="black",
+          font = ("Times New Roman", 10))      
+    lbl3.place(x=80, y=210)
+
+    n = tk.StringVar()
+    yearchoosen3 = ttk.Combobox(eb3, width = 27, textvariable = n)
+    yearchoosen3['values'] = years
+    yearchoosen3.current()
+    yearchoosen3.place(x=180, y=210)
+
+   
+    # Year Selection 4 by creating labels, comboboxes & combobox drop down lists
+    lbl4 = ttk.Label(eb3, text = "Select Year 4 :",
+          background = 'purple', foreground ="black",
+          font = ("Times New Roman", 10))      
+    lbl4.place(x=80, y=265)
+
+    n = tk.StringVar()
+    yearchoosen4 = ttk.Combobox(eb3, width = 27, textvariable = n)
+    yearchoosen4['values'] = years
+    yearchoosen4.current()
+    yearchoosen4.place(x=180, y=265)
+
+# Year Selection 5 by creating labels, comboboxes & combobox drop down lists
+    lbl4 = ttk.Label(eb3, text = "Select Year 5 :",
+          background = 'purple', foreground ="black",
+          font = ("Times New Roman", 10))      
+    lbl4.place(x=80, y=320)
+
+    n = tk.StringVar()
+    yearchoosen5 = ttk.Combobox(eb3, width = 27, textvariable = n)
+    yearchoosen5['values'] = years
+    yearchoosen5.current()
+    yearchoosen5.place(x=180, y=320)
+
+        # Submit button function to make ComPlot
+    def clickeb3():
+        year1= yearchoosen1.get()
+        year2= yearchoosen2.get()
+        year3= yearchoosen3.get()
+        year4=yearchoosen4.get()
+        year5=yearchoosen5.get()
+        yearSelections = [year1, year2, year3,year4,year5]
+
+        makefiveplot(yearSelections,'Humidity')
+
+    #Adding submit & exit buttons
+    btn = Button(eb3,text="Submit", width=6, command=clickeb3)
+    btn.place(x=185, y=365)
+
+    btn1 = Button(eb3,text="Quit", width=6, command=eb3.destroy)
+    btn1.place(x=285, y=365)
+
+
+    eb3.mainloop()
+
+def eb4():
+    eb4 = Tk()
+    eb4.title("Comparing Yearly wind Point speed")
+    eb4.configure(background="white")
+#App placement
+    app_width = 500
+    app_height = 450
+
+    screen_width = eb4.winfo_screenwidth()
+    screen_height = eb4.winfo_screenheight()
+
+    x = (screen_width / 2) - (app_width / 2)
+    y = (screen_height / 2) - (app_height / 2)
+
+    eb4.geometry(f'{app_width}x{app_height}+{int(x)}+{int(y)}')
+
+    lbl0 = ttk.Label(eb4, text = "Comparing Yearly wind speed",
+          background = 'purple', foreground ="black",
+          font = ("Times New Roman", 15))
+    lbl0.place(x=100, y=20)
+
+    # Year Selection 1 by creating labels, comboboxes & combobox drop down lists
+    lbl1 = ttk.Label(eb4, text = "Select Year 1 :",
+          background = 'purple', foreground ="black",
+          font = ("Times New Roman", 10))
+    lbl1.place(x=80, y=100)
+         
+    n = tk.StringVar()
+    yearchoosen1 = ttk.Combobox(eb4, width = 27, textvariable = n)
+    yearchoosen1['values'] = years
+    yearchoosen1.current()
+    yearchoosen1.place(x=180, y=100)
+
+    # Year Selection 2 by creating labels, comboboxes & combobox drop down lists
+    lbl2 = ttk.Label(eb4, text = "Select Year 2 :",
+        background = 'purple', foreground ="black",
+          font = ("Times New Roman", 10))
+    lbl2.place(x=80, y=155)
+
+    n = tk.StringVar()
+    yearchoosen2 = ttk.Combobox(eb4, width = 27, textvariable = n)
+    yearchoosen2['values'] = years
+    yearchoosen2.current()
+    yearchoosen2.place(x=180, y=155)
+
+    # Year Selection 3 by creating labels, comboboxes & combobox drop down lists
+    lbl3 = ttk.Label(eb4, text = "Select Year 3 :",
+          background = 'purple', foreground ="black",
+          font = ("Times New Roman", 10))      
+    lbl3.place(x=80, y=210)
+
+    n = tk.StringVar()
+    yearchoosen3 = ttk.Combobox(eb4, width = 27, textvariable = n)
+    yearchoosen3['values'] = years
+    yearchoosen3.current()
+    yearchoosen3.place(x=180, y=210)
+
+   
+    # Year Selection 4 by creating labels, comboboxes & combobox drop down lists
+    lbl4 = ttk.Label(eb4, text = "Select Year 4 :",
+          background = 'purple', foreground ="black",
+          font = ("Times New Roman", 10))      
+    lbl4.place(x=80, y=265)
+
+    n = tk.StringVar()
+    yearchoosen4 = ttk.Combobox(eb4, width = 27, textvariable = n)
+    yearchoosen4['values'] = years
+    yearchoosen4.current()
+    yearchoosen4.place(x=180, y=265)
+
+    # Year Selection 5 by creating labels, comboboxes & combobox drop down lists
+    lbl4 = ttk.Label(eb4, text = "Select Year 5 :",
+          background = 'purple', foreground ="black",
+          font = ("Times New Roman", 10))      
+    lbl4.place(x=80, y=320)
+
+    n = tk.StringVar()
+    yearchoosen5 = ttk.Combobox(eb4, width = 27, textvariable = n)
+    yearchoosen5['values'] = years
+    yearchoosen5.current()
+    yearchoosen5.place(x=180, y=320)
+
+        # Submit button function to make ComPlot
+    def clickeb4():
+        year1= yearchoosen1.get()
+        year2= yearchoosen2.get()
+        year3= yearchoosen3.get()
+        year4=yearchoosen4.get()
+        year5=yearchoosen5.get()
+        yearSelections = [year1, year2, year3,year4,year5]
+
+        makefiveplot(yearSelections,'wind speed')
+
+    #Adding submit & exit buttons
+    btn = Button(eb4,text="Submit", width=6, command=clickeb4)
+    btn.place(x=185, y=365)
+
+    btn1 = Button(eb4,text="Quit", width=6, command=eb4.destroy)
+    btn1.place(x=285, y=365)
+
+
+    eb4.mainloop()
+
+         #YEAR FIVE options
+ml5 = ttk.Label(start, text = "Five Years",
+          background = 'light green', foreground ="black",
+          font = ("Times New Roman", 15))      
+ml5.place(x=625, y=50)
+
+btn14 = Button(start,text="Temperature (° F)", width=20, command=eb1)
+btn14.place(x=120, y=100)
+
+btn15 = Button(start,text="Dew Point (° F)", width=20, command=eb2)
+btn15.place(x=120, y=150)
+
+btn16 = Button(start,text="Humidity (%)", width=20, command=eb3)
+btn16.place(x=120, y=200)
+
+btn17 = Button(start,text="Wind Speed (mph)", width=20, command=eb4)
+btn17.place(x=120, y=250)
+
 start.mainloop()
